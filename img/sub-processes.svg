@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg fill='none' font-size='11pt' height='75.2px' preserveAspectRatio='xMidYMid meet' xml:space='preserve' stroke='black' stroke-miterlimit='10' stroke-width='1.066667' style='shape-rendering:geometricPrecision; text-rendering:geometricPrecision;
+ image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd' text-anchor='middle' viewBox='0 0 99.2 75.2' width='99.2px' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg'>
+<g>
+<rect height='72' rx='1.92' ry='1.92' width='96' x='1.066667' y='0.533333'/>
+<text fill='black' font-size='11pt' stroke-width='0.2pt' x='49.066667' y='34.04'>Collapsed</text>
+<text fill='black' font-size='11pt' stroke-width='0.2pt' x='49.066667' y='48.706667'>Sub-Process</text>
+<rect height='14.4' width='14.4' x='41.866667' y='58.133333'/>
+<line x1='49.066667' x2='49.066667' y1='60.053333' y2='70.613333'/>
+<line x1='43.786667' x2='54.346667' y1='65.333333' y2='65.333333'/>
+</g></svg>

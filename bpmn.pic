@@ -1,0 +1,795 @@
+# vim: syntax=pic
+
+maxpswid = 100
+maxpsht = 100
+
+# vim: syntax=pic
+
+define svg_rotated_text { # text, position, degrees
+    Abs: abs_xy($2)
+    R: (Abs.x, -(Abs.y)) * dpPPI
+
+    rotation = 0 ; if ("$3" != "") then { rotation = $3 }
+
+    command sprintf("<g transform=\"rotate(%g, %g, %g)\">", rotation, R.x, R.y)
+    command sprintf("<text font-size=\"11pt\"
+                           text-anchor=\"middle\"
+                           stroke-width=\"0.266667\"
+                           fill=\"black\"
+                           x=\"%g\" y=\"%g\">", R.x, R.y)
+    command $1
+    command "</text>"
+    command "</g>"
+}
+
+# vim: syntax=pic
+
+######################################################################
+#                             Shapes                                 #
+######################################################################
+
+pi = 3.1415926535
+
+define diamond { # radius, attr
+  [
+    line from Here + (0, $1) to Here + ($1,  0) \
+                        then to Here + (0, -$1) \
+                        then to Here + (-$1, 0) \
+                        then to Here + (0,  $1) \
+                        $2
+  ]
+}
+
+define poly { # center, sides, radius
+  cx = $1.x
+  cy = $1.y
+  n = $2
+  r = $3
+  angle = 2*pi / n
+
+  for i = 0 to n - 1 do {
+    theta = i * angle
+    x[i] = cx - r * sin(theta)
+    y[i] = cy + r * cos(theta)
+  }
+  x[n] = x[0]
+  y[n] = y[0]
+}
+
+define triangle { # radius, attributes
+  [
+    r = $1
+    C: circle rad r with .c at Here invisible
+    P1: ( 0, r)
+    P2: ( r * sqrt(3)/2, -r/2)
+    P3: (-r * sqrt(3)/2, -r/2)
+    line from P1 to P2 then to P3 then to P1 $2
+  ]
+}
+
+define pentagon { # radius, attributes
+  [
+    r = $1
+    C: circle rad r with .c at Here invisible
+    P1: (0, 1) * r
+    P2: (-0.951,  0.309) * r
+    P3: (-0.588, -0.809) * r
+    P4: ( 0.588, -0.809) * r
+    P5: ( 0.951,  0.309) * r
+    line from P1 to P2 then to P3 then to P4 then to P5 then to P1 $2
+  ]
+}
+
+define plus { # attributes
+  t = 0.033
+  l = 3*t
+  h = l/2
+
+  line from (Here + (-t/2, -l)) to (Here + (t/2, -l)) \
+                         then to (Here + (t/2, -t/2)) \
+                         then to (Here + (l, -t/2)) \
+                         then to (Here + (l, t/2)) \
+                         then to (Here + (t/2, t/2)) \
+                         then to (Here + (t/2, l)) \
+                         then to (Here + (-t/2, l)) \
+                         then to (Here + (-t/2, t/2)) \
+                         then to (Here + (-l, t/2)) \
+                         then to (Here + (-l, -t/2)) \
+                         then to (Here + (-t/2, -t/2)) \
+                         then to (Here + (-t/2, -l)) \
+                         then to (Here + (-t/2, -l)) $1
+}
+
+define cross { # center, thickness, attributes
+  t = $2
+  l = 3 * $2
+  h = l / 2
+  r = 0.707106 # sqrt(2) / 2
+
+  line from    (r * (-t/2 + l  ), r * (-t/2 - l  )) + $1 \
+            to (r * ( t/2 + l  ), r * ( t/2 - l  )) + $1 \
+       then to (r * ( t/2 + t/2), r * ( t/2 - t/2)) + $1 \
+       then to (r * ( l   + t/2), r * ( l   - t/2)) + $1 \
+       then to (r * ( l   - t/2), r * ( l   + t/2)) + $1 \
+       then to (r * ( t/2 - t/2), r * ( t/2 + t/2)) + $1 \
+       then to (r * ( t/2 - l  ), r * ( t/2 + l  )) + $1 \
+       then to (r * (-t/2 - l  ), r * (-t/2 + l  )) + $1 \
+       then to (r * (-t/2 - t/2), r * (-t/2 + t/2)) + $1 \
+       then to (r * (-l   - t/2), r * (-l   + t/2)) + $1 \
+       then to (r * (-l   + t/2), r * (-l   - t/2)) + $1 \
+       then to (r * (-t/2 + t/2), r * (-t/2 - t/2)) + $1 \
+       then to (r * (-t/2 + l  ), r * (-t/2 - l  )) + $1 $3
+}
+
+define rarrow { # thickness, attr
+  [
+    t = 2 * $1
+    l = 3 * t
+    h = l / 2
+
+    line from    (-t/2, t/2) to (-l, t/2) \
+         then to (-l, -t/2) \
+         then to (-t/2, -t/2) \
+         then to (-t/2, -t) \
+         then to (t/2, 0) \
+         then to (-t/2, t) \
+         then to (-t/2, t/2) $2
+  ]
+}
+
+define envelope { # width, foreground, background, attr
+  [
+    B: box with .c at Here width $1 height (2*$1/3) $2 $3
+    line from B.nw to B.c then to B.ne $2
+  ] $4
+}
+
+define hand {# wid, ht
+  [
+    w = $1
+    h = 2*w/3
+    B: box wid w ht h with .c at Here invisible
+    line from B.sw to (B.nw - (0, 0.05))
+    arc cw from (B.nw - (0, 0.05)) to (B.nw + (0.05, 0)) with .c at (B.nw + (0.05, -0.05))
+    line to B.n; arc cw from B.n to B.n - (0, h/5) with .c at (B.n - (0, h/10))
+    line to B.nw + (w/4,  -h/5)
+    line to B.ne - (w/5,   h/5); arc cw to B.ne - (w/5, 2*h/5) with .c at (B.ne - (w/5, 3*h/10))
+    line to B.n  - (  0, 2*h/5)
+    line to B.ne - (w/7, 2*h/5); arc cw to B.ne - (w/7, 3*h/5) with .c at (B.ne - (w/7, 5*h/10))
+    line to B.n  - (  0, 3*h/5)
+    line to B.ne - (w/5, 3*h/5); arc cw to B.ne - (w/5, 4*h/5) with .c at (B.ne - (w/5, 7*h/10))
+    line to B.n  - (  0, 4*h/5)
+    line to B.ne - (w/3, 4*h/5); arc cw to B.ne - (w/3, 5*h/5) with .c at (B.ne - (w/3, 9*h/10))
+    line to B.sw
+  ]
+}
+
+define gear { # radius
+  [
+    r = $1/1.5
+    C: circle rad r/2 with .c at Here
+    poly(C.c, 16, r)
+    line from x[0], y[0] to x[0], y[0]
+    for i = 0 to n - 1 by 2 do {
+      dx = x[i+1] - x[i] ; dy = y[i+1] - y[i]
+      dx1 = -dy; dy1 = dx
+      P1 : (x[i], y[i]) - (dx1, dy1)
+      P2 : P1 + (dx, dy)
+      continue to P1 then to P2 then to (x[i+1], y[i+1]) then to (x[i+2], y[i+2])
+    }
+  ]
+}
+
+define human { # radius
+  [
+    r = $1
+    C: circle rad r/2 with .c at Here
+    arc cw from C.s - (r, r) to C.s + (r, -r) at C.s + (0, -r)
+  ]
+}
+
+define scroll { # radius
+  [
+    B: box wid 4*$1/3 ht 2*$1 with .c at Here invisible
+    line from B.nw to B.ne
+    arc cw at (B.e.x -0.05, (B.e.y + B.ne.y)/2) to B.e
+    arc ccw at (B.e.x +0.05, (B.e.y + B.se.y)/2) to B.se
+    line to B.sw
+    arc cw at (B.w.x +0.05, (B.w.y + B.sw.y)/2) to B.w
+    arc ccw at (B.w.x -0.05, (B.w.y + B.nw.y)/2) to B.nw
+    line from (1/2 <B.nw, B.w>) + (0.03, 0) to (1/2 <B.ne, B.e>) - (0.01, 0)
+    line from B.w + (0.02, 0) to B.e - (0.02, 0)
+    line from (1/2 <B.sw, B.w>) + (0.01, 0) to (1/2 <B.se, B.e>) - (0.03, 0)
+  ]
+}
+
+define table { # radius
+  [
+    r = $1
+    B: box wid 2*r ht 2*r with .c at Here
+    line from B.w + (  0,  r/3) to B.e + (   0,  r/3)
+    line from B.w + (  0, -r/3) to B.e + (   0, -r/3)
+    line from B.w + (r/2,  r/3) to B.sw + (r/2,    0)
+  ]
+}
+
+
+# vim: syntax=pic
+
+# Events
+
+define icon_event_none {
+}
+
+define icon_event_message { # fg, bg, attr
+  envelope(0.20, $1, $2, with .c at Here) 
+}
+
+define icon_event_timer { # fg, bg, attr
+  [
+    C: circle with .c at Here rad 0.125 $2
+    line from C.c to (C.c + (0.07,0)) $1
+    line from C.c to (C.c + (0,0.10)) $1
+    poly(C.c, 12, 0.125)
+    for i = 0 to n - 1 do {
+      line from (x[i], y[i]) to ( (4*x[i]+cx)/5,(4*y[i]+cy)/5) $1
+    }
+  ] with .c at Here $3
+}
+
+define icon_event_signal { # fg, bg, attr
+  [ triangle(0.13, $2) ] with .c at Here $3
+}
+
+define icon_event_multiple { # fg, bg, attr
+  [ pentagon(0.13, $2) ] with .c at Here $3
+}
+
+define icon_event_conditional { # fg, bg, attr
+  [
+    B: box with .c at Here wid 0.14 ht 0.17 $1 $2
+    line from (B.w.x + 0.02, (B.nw.y + B.w.y)/2) to (B.e.x - 0.02, (B.ne.y + B.e.y)/2) $1
+    line from (B.w.x + 0.02, B.w.y)              to (B.e.x - 0.02, B.e.y) $1
+    line from (B.w.x + 0.02, (B.sw.y + B.w.y)/2) to (B.e.x - 0.02, (B.se.y + B.e.y)/2) $1
+  ] with .c at Here $3
+}
+
+define icon_event_link { # fg, bg, attr
+  [ rarrow(0.03, $2) ] with .c at Here $3
+}
+
+define icon_event_escalation { # fg, bg, attr
+  [
+    circle with .c at Here radius 0.15 colored "white"
+    P1: ( 0, 0.14)
+    P2: (-0.1154, -0.066)
+    P3: (0, 0)
+    P4: (0.1154, -0.066)
+    line from P1 to P2 then to P3 then to P4 then to P1 $2
+  ] with .c at Here $3
+}
+
+define icon_event_error { # fg, bg, attr
+  [
+    r = 0.10*9/10
+    P1: ( -r,    -r)
+    P2: ( -r/2, 2*r/3)
+    P3: (  r/2,   r/8)
+    P4: (  r,     r)
+    P5: (2*r/3,  -r/2)
+    P6: ( -r/4,   r/8)
+    line from P1 to P2 then to P3 then to P4 then to P5 then to P6 then to P1 $2
+  ] with .c at Here $3
+}
+
+define icon_event_cancel { # fg, bg, attr
+  [ cross(Here, 0.033, $2) ] with .c at Here
+}
+
+define icon_event_parallel { # fg, bg, attr
+  [ plus($1 $2) ] with .c at Here $3
+}
+
+define icon_event_compensation { # fg, bg, attr
+  [
+    w = 0.2
+    h = w/sqrt(3)
+    P1: (-w/2,    0)
+    P2: (   0,  h/2)
+    P3: (   0, -h/2)
+    P4: (   0,    0)
+    P5: ( w/2,  h/2)
+    P6: ( w/2, -h/2)
+    line from P1 to P2 then to P3 then to P1 $2
+    line from P4 to P5 then to P6 then to P4 $2
+  ] with .c at Here $3
+}
+
+define icon_event_terminate { # fg, bg, attr
+  [
+    circle radius 0.10 $2
+  ] with .c at Here $3
+}
+
+# Gateways
+
+define icon_gateway_none {
+}
+
+define icon_gateway_exclusive { # fg, bg, attr
+  [
+    w = 0.18
+    B: box width w height w colored "white"
+    line from B.nw to B.se - (w/4, 0) \
+              then to B.se \
+              then to B.nw + (w/4, 0) \
+              then to B.nw shaded "black"
+    line from B.ne to B.sw + (w/4, 0) \
+              then to B.sw \
+              then to B.ne - (w/4, 0) \
+              then to B.ne shaded "black"
+  ] with .c at Here $3
+}
+
+define icon_gateway_parallel {
+  plus(shaded "black")
+}
+
+define icon_gateway_inclusive {
+  [
+    circle rad 0.10 thick 2.5
+  ] $3
+}
+
+define icon_gateway_complex { # fg, bg, attr
+  [ 
+    C: circle with .c at Here radius 0.10 colored "white"
+    line from C.n  to C.s  thick 2
+    line from C.w  to C.e  thick 2
+    line from C.nw to C.se thick 2
+    line from C.sw to C.ne thick 2
+  ] $3
+}
+
+define icon_gateway_event_based {
+  bpmn_event_start(multiple, , with .c at Here scaled 0.5)
+}
+
+define icon_gateway_event_based_exclusive {
+  bpmn_event_catching(multiple, with .c at Here scaled 0.5)
+}
+
+define icon_gateway_event_based_parallel {
+  bpmn_event_start(parallel, , with .c at Here scaled 0.5)
+}
+
+# Tasks
+
+define icon_task_none {
+}
+
+define icon_task_receive {
+    envelope(0.15, colored "black", shaded "white")
+}
+
+define icon_task_send {
+    envelope(0.15, colored "white", shaded "black")
+}
+
+define icon_task_manual {
+    hand(0.15, 0.1)
+}
+
+define icon_task_service {
+    gear(0.075)
+}
+
+define icon_task_user {
+    human(0.075)
+}
+
+define icon_task_script {
+    scroll(0.075)
+}
+
+define icon_task_rule {
+    table(0.075)
+}
+
+define icon_process_collapsed {
+  [
+    box width 0.15 height 0.15
+    line from last box.n - (0, 0.02) to last box.s + (0, 0.02)
+    line from last box.w + (0.02, 0) to last box.e - (0.02, 0)
+  ] $1
+}
+
+# vim: syntax=pic
+
+######################################################################
+#                             Events                                 #
+######################################################################
+
+define bpmn_event_start { # type, [ line style, [ attributes ] ]
+  [
+    circle rad 0.2 $2
+    move to last circle.c
+    exec "icon_event_$1(colored \"black\", shaded \"white\")"
+  ] $3
+}
+
+define bpmn_event_start_interrupting {
+    bpmn_event_start($1, solid)
+}
+
+define bpmn_event_start_non_interrupting {
+    bpmn_event_start($1, dashed, $2)
+}
+
+define bpmn_event_intermediate { # type, line style, foreground, background, attributes
+  [
+    circle rad 0.2 $2
+    circle rad 0.16 at last circle.c $2
+    move to last circle.c
+    exec "icon_event_$1($3, $4)"
+  ] $5
+}
+
+define bpmn_event_catching { # type [, attributes ]
+    bpmn_event_intermediate($1, solid, colored "black", shaded "white", $2)
+}
+
+define bpmn_event_boundary { # type [, attributes ]
+    bpmn_event_intermediate($1, solid, colored "black", shaded "white", $2)
+}
+
+define bpmn_event_boundary_non_interrupting { # type, attr
+    bpmn_event_intermediate($1, dashed, colored "black", shaded "white", $2)
+}
+
+define bpmn_event_throwing { # type, attr
+    bpmn_event_intermediate($1, solid, colored "white", shaded "black", $2)
+}
+
+define bpmn_event_end {
+  [
+    circle rad 0.17 thick 2.5 $2
+    move to last circle.c
+    exec "icon_event_$1(color \"white\", shaded \"black\")"
+  ]
+}
+
+
+# vim: syntax=pic
+
+define bpmn_gateway {
+  [
+    B: diamond(0.2)
+    if ($+ >= 1) then {
+      move to B.c
+      exec "icon_gateway_$1( , , with .c at Here)"
+    }
+  ] $2
+}
+
+define bpmn_gateway_none {
+  bpmn_gateway(none, $1)
+}
+
+
+define bpmn_gateway_exclusive {
+  bpmn_gateway(exclusive, $1)
+}
+
+define bpmn_gateway_parallel {
+  bpmn_gateway(parallel, $1)
+}
+
+define bpmn_gateway_inclusive {
+  bpmn_gateway(inclusive, $1)
+}
+
+define bpmn_gateway_complex {
+  bpmn_gateway(complex, $1)
+}
+
+define bpmn_gateway_event_based {
+  bpmn_gateway(event_based)
+}
+
+define bpmn_gateway_event_based_exclusive {
+  bpmn_gateway(event_based_exclusive)
+}
+
+define bpmn_gateway_event_based_parallel {
+  bpmn_gateway(event_based_parallel)
+}
+
+
+# vim: syntax=pic
+
+define bpmn_activity {
+  box wid 1 ht 0.75 rad 0.02 $1
+}
+
+define bpmn_task {
+  [
+    B: bpmn_activity($1)
+    if ("$2" != "") then {
+      move to B.nw + (0.05, -0.1)
+      exec "icon_task_$2"
+    }
+  ] $3
+}
+
+define bpmn_task_none {
+  bpmn_task($1, none, $2)
+}
+
+define bpmn_task_receive {
+  bpmn_task($1, receive, $2)
+}
+
+define bpmn_task_send {
+  bpmn_task($1, send, $2)
+}
+
+define bpmn_task_manual {
+  bpmn_task($1, manual, $2)
+}
+
+define bpmn_task_service {
+  bpmn_task($1, service, $2)
+}
+
+define bpmn_task_user {
+  bpmn_task($1, user, $2)
+}
+
+define bpmn_task_script {
+  bpmn_task($1, script, $2)
+}
+
+define bpmn_task_rule {
+  bpmn_task($1, rule, $2)
+}
+
+define bpmn_process {
+  [
+    B: bpmn_activity($1)
+    if ($+ >= 2) then {
+      exec "icon_process_$2(with .s at B.s)"
+    }
+  ] $3
+}
+
+define bpmn_process_collapsed {
+    bpmn_process($1, collapsed)
+}
+
+define bpmn_process_expanded {
+  box wid $1 ht $2 rad 0.02 $3
+}
+
+# vim: syntax=pic
+
+define bpmn_sequence_flow { # $1, $2, ... - line segments
+    _bpmn_flow([], solid, shaded "black", $1, $2, $3, $4, $5, $6, $7, $8, $9)
+}
+
+define bpmn_sequence_flow_default {
+    _bpmn_flow([ _bpmn_flow_start_slash(eta) ] with .Tip at (x[0], y[0]), solid, shaded "black", $1, $2, $3, $4, $5, $6, $7, $8, $9)
+}
+
+define bpmn_sequence_flow_conditional {
+    _bpmn_flow([ _bpmn_flow_start_diamond(eta, shaded "white") ] with .Tip at (x[0], y[0]), solid, shaded "black", $1, $2, $3, $4, $5, $6, $7, $8, $9)
+}
+
+define bpmn_message_flow {
+    _bpmn_flow([ _bpmn_flow_start_circle ] with .c at (x[0], y[0]), dashed, shaded "white", $1, $2, $3, $4, $5, $6, $7, $8, $9)
+}
+
+
+define _bpmn_flow_start_diamond { # rotation, style
+    Tip: (0, 0)
+    P2:  (0.08*cos($1) - 0.04*sin($1), 0.08*sin($1) + 0.04*cos($1))
+    P3:  (0.16*cos($1) - 0.00*sin($1), 0.16*sin($1) + 0.00*cos($1))
+    P4:  (0.08*cos($1) + 0.04*sin($1), 0.08*sin($1) - 0.04*cos($1))
+    line shaded "white" from Tip to P2 then to P3 then to P4 then to Tip
+}
+
+define _bpmn_flow_start_slash { # rotation, style
+    Tip: (-0.08*cos($1) - 0.00*sin($1), -0.08*sin($1) + 0.00*cos($1))
+    P2:  ( 0.08*cos($1) - 0.00*sin($1),  0.08*sin($1) + 0.00*cos($1))
+    P3:  (-0.04*cos($1) - 0.04*sin($1), -0.04*sin($1) + 0.04*cos($1))
+    P4:  ( 0.04*cos($1) + 0.04*sin($1),  0.04*sin($1) - 0.04*cos($1))
+    line from Tip to P2
+    line from P3  to P4
+}
+
+define _bpmn_flow_start_circle {
+    circle rad 0.025 shaded "white"
+}
+
+define _bpmn_arrowhead { # rotation, style
+    P1:  ( 0.025*sin($1), -0.025*cos($1))
+    P2:  (-0.025*sin($1),  0.025*cos($1))
+    Tip: ( 0.075*cos($1),  0.075*sin($1))
+    P4:  ( 0.025*sin($1), -0.025*cos($1))
+    line from P1 to P2 then to Tip then to P4 $2
+}
+
+define _bpmn_flow { # start, line style, arrowhead style, n
+                    # $5, $6, ... - line segments
+    line $2 $4
+
+    x[0] = last line.start.x ; y[0] = last line.start.y
+    x[1] = last line.end.x   ; y[1] = last line.end.y
+
+    n = 1
+
+    for i = 5 to $+ do {
+        exec sprintf(                             \
+            "if (\"$%g\" != \"\") then { "      + \
+                "continue $%g ; "               + \
+                "x[i-3] = last line.end.x ; "   + \
+                "y[i-3] = last line.end.y ; "   + \
+                "n += 1 ; "                     + \
+            "}", i, i                             \
+        )
+    }
+
+    sdx = x[1] - x[0]; sdy = y[1] - y[0]
+    eta = atan2(sdy, sdx)
+    
+    edx = x[n] - x[n-1]; edy = y[n] - y[n-1]
+    theta = atan2(edy, edx)
+    
+    $1
+
+    [ _bpmn_arrowhead(theta, $3) ] with .Tip at (x[n], y[n])
+}
+
+
+# vim: syntax=pic
+
+level = 0
+abs_x[level] = Here.x
+abs_y[level] = Here.y
+
+define push_abs_xy {
+    level += 1
+    abs_x[level] = Here.x + abs_x[level-1]
+    abs_y[level] = Here.y + abs_y[level-1]
+}
+
+define pop_abs_xy {
+    abs_x[level] = 0
+    abs_y[level] = 0
+    level -= 1
+}
+
+define with_abs_xy {
+    push_abs_xy
+    $1
+    pop_abs_xy
+}
+
+define abs_xy {
+    $1 + (abs_x[level], abs_y[level])
+}
+
+define bpmn_horizontal_pool { # width, height, lanes, attributes
+    [
+        _width  = $1
+        _height = $2
+
+        box width _width height _height
+        Label: box width 0.25 height _height with .w at last box.w
+        Content: box width _width - Label.width height _height invisible with .w at Label.e
+        Lanes: $3 with .nw at Content.nw
+    ] $4
+}
+
+define bpmn_horizontal_pool_black_box { # width, height, text, attributes
+    box width $1 height $2 $3 $4
+}
+
+define bpmn_horizontal_lane { # height, content, attributes
+    [
+        _height = $1
+        
+        Label: box width 0.25 height _height invisible
+        Content: box width Content.width height _height with .w at Label.w
+        Process: $2
+    ] $3
+}
+
+# vim: syntax=pic
+
+define Start { # type [, attributes ]
+    bpmn_event_start($1, solid, $2)
+}
+
+define StartNonInterrupting {
+    bpmn_event_start_non_interrupting($1, $2)
+}
+
+define Boundary {
+    bpmn_event_boundary($1, $2)
+}
+
+define BoundaryNonInterrupting {
+    bpmn_event_boundary_non_interrupting($1, $2)
+}
+
+define Catching {
+    bpmn_event_catching($1, $2)
+}
+
+define Throwing {
+    bpmn_event_throwing($1, $2)
+}
+
+define End {
+    bpmn_event_end($1, $2)
+}
+
+define Gateway {
+    bpmn_gateway($1, $2)
+}
+
+define Task {
+    bpmn_task($1, $2, $3)
+}
+
+define SubProcess {
+    bpmn_process($1, $2, $3)
+}
+
+
+define SequenceFlow {
+    bpmn_sequence_flow($1, $2, $3, $4, $5, $6, $7, $8, $9)
+}
+
+define ConditionalFlow {
+    bpmn_sequence_flow_conditional($1, $2, $3, $4, $5, $6, $7, $8, $9)
+}
+
+define DefaultFlow {
+    bpmn_sequence_flow_default($1, $2, $3, $4, $5, $6, $7, $8, $9)
+}
+
+define MessageFlow {
+    bpmn_message_flow($1, $2, $3, $4, $5, $6, $7, $8, $9)
+}
+
+define HorizontalPool {
+    bpmn_horizontal_pool($1, $2, $3, $4) 
+}
+
+define HorizontalBlackBoxPool {
+    bpmn_horizontal_pool_black_box($1, $2, $3, $4)
+}
+
+define HorizontalLane {
+   bpmn_horizontal_lane($1, $2)
+}
+
+define Pool {
+    HorizontalPool($1, $2, $3)
+}
+
+define Lane {
+    HorizontalLane($1, $2)
+}
+
+define Text { # text, position, rotation
+    if ("$2" == "") then {
+        svg_rotated_text($1, Here, 0)
+    } else {
+        svg_rotated_text($1, $2, $3)
+    }
+}
+
+

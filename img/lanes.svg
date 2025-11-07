@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg fill='none' font-size='11pt' height='531.2px' preserveAspectRatio='xMidYMid meet' xml:space='preserve' stroke='black' stroke-miterlimit='10' stroke-width='1.066667' style='shape-rendering:geometricPrecision; text-rendering:geometricPrecision;
+ image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd' text-anchor='middle' viewBox='0 0 963.2 531.2' width='963.2px' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg'>
+<g>
+<rect height='192' width='960' x='1.066667' y='0.533333'/>
+<rect height='192' width='24' x='1.066667' y='0.533333'/>
+<g transform='rotate(-90, 12, 96)'>
+<text fill='black' font-size='11pt' stroke-width='0.266667' text-anchor='middle' x='12' y='96'>
+Pool
+</text>
+</g>
+<rect height='288' width='960' x='1.066667' y='240.533333'/>
+<rect height='288' width='24' x='1.066667' y='240.533333'/>
+<rect height='96' width='936' x='25.066667' y='240.533333'/>
+<rect height='96' width='936' x='25.066667' y='336.533333'/>
+<rect height='96' width='936' x='25.066667' y='432.533333'/>
+<g transform='rotate(-90, 12, 384)'>
+<text fill='black' font-size='11pt' stroke-width='0.266667' text-anchor='middle' x='12' y='384'>
+Pool with lanes
+</text>
+</g>
+<g transform='rotate(-90, 36, 288)'>
+<text fill='black' font-size='11pt' stroke-width='0.266667' text-anchor='middle' x='36' y='288'>
+Lane 1
+</text>
+</g>
+<g transform='rotate(-90, 36, 384)'>
+<text fill='black' font-size='11pt' stroke-width='0.266667' text-anchor='middle' x='36' y='384'>
+Lane 2
+</text>
+</g>
+<g transform='rotate(-90, 36, 480)'>
+<text fill='black' font-size='11pt' stroke-width='0.266667' text-anchor='middle' x='36' y='480'>
+Lane 3
+</text>
+</g>
+</g></svg>

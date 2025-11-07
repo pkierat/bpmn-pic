@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg fill='none' font-size='11pt' height='21.48px' preserveAspectRatio='xMidYMid meet' xml:space='preserve' stroke='black' stroke-miterlimit='10' stroke-width='1.066667' style='shape-rendering:geometricPrecision; text-rendering:geometricPrecision;
+ image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd' text-anchor='middle' viewBox='0 0 915.2 21.48' width='915.2px' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg'>
+<g>
+<line x1='1.066667' x2='193.066667' y1='14.973333' y2='14.973333'/>
+<polyline fill='black' points='185.866667,17.373333
+185.866667,12.573333
+193.066667,14.973333
+185.866667,17.373333' stroke-width='0'/>
+<polyline points='185.866667,17.373333 185.866667,12.573333
+193.066667,14.973333
+185.866667,17.373333'/>
+<text fill='black' font-size='11pt' stroke-width='0.266667' x='97.066667' y='10.213333'>Sequence flow</text>
+<line x1='241.066667' x2='433.066667' y1='14.973333' y2='14.973333'/>
+<line x1='241.066667' x2='256.426667' y1='14.973333' y2='14.973333'/>
+<line x1='244.906667' x2='252.586667' y1='11.133333' y2='18.813333'/>
+<polyline fill='black' points='425.866667,17.373333
+425.866667,12.573333
+433.066667,14.973333
+425.866667,17.373333' stroke-width='0'/>
+<polyline points='425.866667,17.373333 425.866667,12.573333
+433.066667,14.973333
+425.866667,17.373333'/>
+<text fill='black' font-size='11pt' stroke-width='0.266667' x='337.066667' y='10.213333'>Default flow</text>
+<line x1='481.066667' x2='673.066667' y1='14.973333' y2='14.973333'/>
+<polyline fill='white' points='481.066667,14.973333
+488.746667,11.133333
+496.426667,14.973333
+488.746667,18.813333
+481.066667,14.973333' stroke-width='0'/>
+<polyline points='481.066667,14.973333 488.746667,11.133333
+496.426667,14.973333
+488.746667,18.813333
+481.066667,14.973333'/>
+<polyline fill='black' points='665.866667,17.373333
+665.866667,12.573333
+673.066667,14.973333
+665.866667,17.373333' stroke-width='0'/>
+<polyline points='665.866667,17.373333 665.866667,12.573333
+673.066667,14.973333
+665.866667,17.373333'/>
+<text fill='black' font-size='11pt' stroke-width='0.266667' x='577.066667' y='10.213333'>Conditional flow</text>
+<line stroke-dasharray='5.6,4' x1='721.066667' x2='913.066667' y1='14.973333' y2='14.973333'/>
+<circle cx='721.066667' cy='14.973333' fill='white' r='2.4'/>
+<polyline fill='white' points='905.866667,17.373333
+905.866667,12.573333
+913.066667,14.973333
+905.866667,17.373333' stroke-width='0'/>
+<polyline points='905.866667,17.373333 905.866667,12.573333
+913.066667,14.973333
+905.866667,17.373333'/>
+<text fill='black' font-size='11pt' stroke-width='0.266667' x='817.066667' y='10.213333'>Message flow</text>
+</g></svg>
