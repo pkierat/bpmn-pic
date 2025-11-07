@@ -1,0 +1,3 @@
+.asciidoctor
+src/*.pic
+*.sw?
