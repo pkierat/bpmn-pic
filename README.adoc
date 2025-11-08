@@ -133,129 +133,51 @@ $ dpic -v diagram.pic > diagram.svg
 
 === Events
 
-[%header,grid="none",frame="none"]
-|===
-| Start | Non-int. | Catching | Boundary non-int. | Throwing | End
-|===
-
 [dpic,events,pdfwidth="100%",align="center"]
 ----
 copy "bpmn.pic"
 
-E0: Start(none); move right 1
-    move right 4.2
-    Throwing(none); move right 1
-    End(none); move right 1
+define event_types { # types ...
+    cwd = 1
+    cht = 0.5
+    n = $+
 
-move to (E0.w.x, E0.s.y - 0.5)
+    down
+    [
+        right
+        for j = 1 to 7 do {
+            R[j]: box width cwd height cht invisible
+        }
+        [ "Type"                        ] with .c at R[1].c
+        [ "Start"                       ] with .c at R[2].c
+        [ "Start" "non-interrupting"    ] with .c at R[3].c
+        [ "Catching"                    ] with .c at R[4].c
+        [ "Boundary" "non-interrupting" ] with .c at R[5].c
+        [ "Throwing"                    ] with .c at R[6].c
+        [ "End"                         ] with .c at R[7].c
+    ]
+    for i = 1 to n do {
+        [
+            right
+            for j = 1 to 7 do {
+                R[j]: box width cwd height cht invisible
+            }
+            [ exec sprintf("\"$%g\"", i);                      ] with .c at R[1].c
+            [ exec sprintf("Start($%g)", i);                   ] with .c at R[2].c
+            [ exec sprintf("StartNonInterrupting($%g)", i);    ] with .c at R[3].c
+            [ exec sprintf("Catching($%g)", i);                ] with .c at R[4].c
+            [ exec sprintf("BoundaryNonInterrupting($%g)", i); ] with .c at R[5].c
+            [ exec sprintf("Throwing($%g)", i);                ] with .c at R[6].c
+            [ exec sprintf("End($%g)", i);                     ] with .c at R[7].c
+        ]
+    }
+    right
+}
 
-E1: Start(message); move right 1
-    StartNonInterrupting(message); move right 1
-    Catching(message); move right 1
-    BoundaryNonInterrupting(message); move right 1
-    Throwing(message); move right 1
-    End(message); move right 1
-
-move to (E1.w.x, E1.s.y - 0.5)
-
-E2: Start(timer); move right 1
-    StartNonInterrupting(timer); move right 1
-    Catching(timer); move right 1
-    BoundaryNonInterrupting(timer); move right 1
-    Throwing(timer); move right 1
-    End(timer); move right 1
-
-move to (E2.w.x, E2.s.y - 0.5)
-
-E3: Start(signal); move right 1
-    StartNonInterrupting(signal); move right 1
-    Catching(signal); move right 1
-    BoundaryNonInterrupting(signal); move right 1
-    Throwing(signal); move right 1
-    End(signal); move right 1
-
-move to (E3.w.x, E3.s.y - 0.5)
-
-E4: Start(multiple); move right 1
-    StartNonInterrupting(multiple); move right 1
-    Catching( multiple); move right 1
-    BoundaryNonInterrupting(multiple); move right 1
-    Throwing(multiple); move right 1
-    End(multiple); move right 1
-
-move to (E4.w.x, E4.s.y - 0.5)
-
-E5: Start(conditional); move right 1
-    StartNonInterrupting(conditional); move right 1
-    Catching(conditional); move right 1
-    BoundaryNonInterrupting(conditional); move right 1
-    Throwing(conditional); move right 1
-    End(conditional); move right 1
-
-move to (E5.w.x, E5.s.y - 0.5)
-
-E6: Start(link); move right 1
-    StartNonInterrupting(link); move right 1
-    Catching(link); move right 1
-    BoundaryNonInterrupting(link); move right 1
-    Throwing(link); move right 1
-    End(link); move right 1
-
-move to (E6.w.x, E6.s.y - 0.5)
-
-E7: Start(escalation); move right 1
-    StartNonInterrupting(escalation); move right 1
-    Catching(escalation); move right 1
-    BoundaryNonInterrupting(escalation); move right 1
-    Throwing(escalation); move right 1
-    End(escalation); move right 1
-
-move to (E7.w.x, E7.s.y - 0.5)
-
-E8: Start(error); move right 1
-    StartNonInterrupting(error); move right 1
-    Catching(error); move right 1
-    BoundaryNonInterrupting(error); move right 1
-    Throwing(error); move right 1
-    End(error); move right 1
-
-move to (E8.w.x, E8.s.y - 0.5)
-
-E9: Start(cancel); move right 1
-    StartNonInterrupting(cancel); move right 1
-    Catching(cancel); move right 1
-    BoundaryNonInterrupting(cancel); move right 1
-    Throwing(cancel); move right 1
-    End(cancel); move right 1
-
-move to (E9.w.x, E9.s.y - 0.5)
-
-E10: Start(parallel); move right 1
-     StartNonInterrupting(parallel); move right 1
-     Catching(parallel); move right 1
-     BoundaryNonInterrupting(parallel); move right 1
-     Throwing(parallel); move right 1
-     End(parallel); move right 1
-
-move to (E10.w.x, E10.s.y - 0.5)
-
-E11: Start(compensation); move right 1
-     StartNonInterrupting(compensation); move right 1
-     Catching(compensation); move right 1
-     BoundaryNonInterrupting(compensation); move right 1
-     Throwing(compensation); move right 1
-     End(compensation); move right 1
-
-move to (E11.w.x, E11.s.y - 0.5)
-
-E12: Start(terminate); move right 1
-     StartNonInterrupting(terminate); move right 1
-     Catching(terminate); move right 1
-     BoundaryNonInterrupting(terminate); move right 1
-     Throwing(terminate); move right 1
-     End(terminate); move right 1
-
-move to (E12.w.x, E12.s.y - 0.5)
+event_types(\
+none, message, timer, signal, multiple, conditional, link,\
+escalation, error, cancel, parallel, compensation, terminate\
+)
 ----
 
 <<<
@@ -266,14 +188,17 @@ move to (E12.w.x, E12.s.y - 0.5)
 ----
 copy "bpmn.pic"
 
-Gateway(none); move right;
-Gateway(exclusive); move right;
-Gateway(parallel); move right;
-Gateway(inclusive); move right;
-Gateway(complex); move right;
-Gateway(event_based); move right;
-Gateway(event_based_exclusive); move right;
-Gateway(event_based_parallel); move right;
+G1: Gateway(none);                  { "none"                  with .c at G1.n + (0, 0.1) }; move right 1;
+G2: Gateway(exclusive);             { "exclusive"             with .c at G2.n + (0, 0.1) }; move right 1;
+G3: Gateway(parallel);              { "parallel"              with .c at G3.n + (0, 0.1) }; move right 1;
+G4: Gateway(inclusive);             { "inclusive"             with .c at G4.n + (0, 0.1) }; move right 0.5;
+
+move to G1.sw + (0, -0.6)
+
+G5: Gateway(complex);               { "complex"               with .c at G5.n + (0, 0.1) }; move right 1;
+G6: Gateway(event_based);           { "event_based"           with .c at G6.n + (0, 0.1) }; move right 1;
+G7: Gateway(event_based_exclusive); { "event_based_exclusive" with .c at G7.n + (0, 0.1) }; move right 1;
+G8: Gateway(event_based_parallel);  { "event_based_parallel"  with .c at G8.n + (0, 0.1) }; move right 0.5;
 ----
 
 === Activities
@@ -284,27 +209,35 @@ Gateway(event_based_parallel); move right;
 ----
 copy "bpmn.pic"
 
-T1: Task("Task", none); move right;
-T2: Task("Send task", send); move right;
-T3: Task("Receive task", receive); move right;
-T4: Task("Manual task", manual)
+T1: Task("", none);    { "none"    with .c at T1.n + (0, 0.1) }; move right;
+T2: Task("", send);    { "send"    with .c at T2.n + (0, 0.1) }; move right;
+T3: Task("", receive); { "receive" with .c at T3.n + (0, 0.1) }; move right;
+T4: Task("", manual);  { "manual"  with .c at T4.n + (0, 0.1) }; 
 
-move to T1.sw + (0, -0.5)
+move to T1.sw + (0, -0.6)
 
-T5: Task("Service task", service) move right;
-T6: Task("User task", user); move right;
-T7: Task("Script task", script); move right;
-T8: Task("Business" "Rule task", rule)
+T5: Task("", service); { "service" with .c at T5.n + (0, 0.1) }; move right;
+T6: Task("", user);    { "user"    with .c at T6.n + (0, 0.1) }; move right;
+T7: Task("", script);  { "script"  with .c at T7.n + (0, 0.1) }; move right;
+T8: Task("", rule);    { "rule"    with .c at T8.n + (0, 0.1) }; 
 
 ----
 
 ==== Sub-processes
 
-[dpic,sub-processes]
+[dpic,sub-processes,pdfwidth="90%",align="center"]
 ----
 copy "bpmn.pic"
 
-P1: SubProcess("Collapsed" "Sub-Process", collapsed)
+P1: SubProcess("");               { "" with .c at P1.n + (0, 0.1) }; move right;
+P2: SubProcess("", sequential);   { "sequential" with .c at P2.n + (0, 0.1) }; move right;
+P3: SubProcess("", parallel);     { "parallel" with .c at P3.n + (0, 0.1) }; move right;
+
+move to P1.sw + (0, -0.6)
+
+P4: SubProcess("", loop);         { "loop" with .c at P4.n + (0, 0.1) }; move right;
+P5: SubProcess("", compensation); { "compensation" with .c at P5.n + (0, 0.1) }; move right;
+P6: SubProcess("", ad_hoc);       { "ad_hoc" with .c at P6.n + (0, 0.1) }; move right;
 ----
 
 ==== Flows
@@ -313,14 +246,18 @@ P1: SubProcess("Collapsed" "Sub-Process", collapsed)
 ----
 copy "bpmn.pic"
 
-SequenceFlow(right 2); L: last line; { "Sequence flow" at L.c + (0, 0.1) }
+SequenceFlow(right 2); L1: last line; { "Sequence flow" at L1.c + (0, 0.1) }
 move
-DefaultFlow(right 2); L: last line; { "Default flow" at L.c + (0, 0.1) }
-move
+DefaultFlow(right 2); L2: last line; { "Default flow" at L2.c + (0, 0.1) }
+
+move to L1.w + (0, -0.5)
+
 ConditionalFlow(right 2); L: last line; { "Conditional flow" at L.c + (0, 0.1) }
 move
 MessageFlow(right 2); L: last line; { "Message flow" at L.c + (0, 0.1) }
 ----
+
+<<<
 
 === Pools and Lanes
 

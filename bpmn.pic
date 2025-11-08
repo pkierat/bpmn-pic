@@ -213,6 +213,29 @@ define table { # radius
   ]
 }
 
+define rewind { # width
+  [
+    w = $1
+    h = w/sqrt(3)
+    B: box width w height w with .c at (0, 0) invisible
+    P1: (-w/2,    0) - (0.03, 0)
+    P2: (   0,  h/2) - (0.03, 0)
+    P3: (   0, -h/2) - (0.03, 0)
+    P4: (   0,    0) - (0.03, 0)
+    P5: ( w/2,  h/2) - (0.03, 0)
+    P6: ( w/2, -h/2) - (0.03, 0)
+    line from P1 to P2 then to P3 then to P1 $2
+    line from P4 to P5 then to P6 then to P4 $2
+  ]
+}
+
+define tilde { # width
+  [
+    B: box wid $1 ht $1  with .c at Here invisible
+    arc cw at ((B.sw.x + B.s.x)/2, B.s.y + 0.05) from B.w to B.c thick 2
+    arc ccw at ((B.s.x + B.se.x)/2, B.n.y - 0.05) from B.c to B.e thick 2
+  ]
+}
 
 # vim: syntax=pic
 
@@ -291,18 +314,7 @@ define icon_event_parallel { # fg, bg, attr
 }
 
 define icon_event_compensation { # fg, bg, attr
-  [
-    w = 0.2
-    h = w/sqrt(3)
-    P1: (-w/2,    0)
-    P2: (   0,  h/2)
-    P3: (   0, -h/2)
-    P4: (   0,    0)
-    P5: ( w/2,  h/2)
-    P6: ( w/2, -h/2)
-    line from P1 to P2 then to P3 then to P1 $2
-    line from P4 to P5 then to P6 then to P4 $2
-  ] with .c at Here $3
+  [ rewind(0.2) ] with .c at Here $3
 }
 
 define icon_event_terminate { # fg, bg, attr
@@ -396,7 +408,7 @@ define icon_task_rule {
     table(0.075)
 }
 
-define icon_process_collapsed {
+define icon_activity_collapsed {
   [
     box width 0.15 height 0.15
     line from last box.n - (0, 0.02) to last box.s + (0, 0.02)
@@ -404,11 +416,40 @@ define icon_process_collapsed {
   ] $1
 }
 
-# vim: syntax=pic
+define icon_activity_loop {
+  [
+    arc ccw from (0.03, 0) to (-0.03, 0) with .c at (0, 0.07)
+    line from (-0.09, 0.02) to (-0.03, 0) then to (-0.04, 0.05)
+  ] $1
+}
 
-######################################################################
-#                             Events                                 #
-######################################################################
+define icon_activity_compensation {
+  [ rewind(0.15) ] $1
+}
+
+define icon_activity_sequential {
+  [
+    B: box width 0.15 height 0.15 invisible
+    line from 1/3 <B.sw, B.w> to 1/3 <B.se, B.e>
+    line from B.w to B.e
+    line from 1/3 <B.nw, B.w> to 1/3 <B.ne, B.e>
+  ] $1
+}
+
+define icon_activity_parallel {
+  [
+    B: box width 0.15 height 0.15 invisible
+    line from 1/3 <B.nw, B.n> to 1/3 <B.sw, B.s>
+    line from B.n to B.s
+    line from 1/3 <B.ne, B.n> to 1/3 <B.se, B.s>
+  ] $1
+}
+
+define icon_activity_ad_hoc {
+  [ tilde(0.15) ] $1
+}
+
+# vim: syntax=pic
 
 define bpmn_event_start { # type, [ line style, [ attributes ] ]
   [
@@ -510,6 +551,13 @@ define bpmn_gateway_event_based_parallel {
 
 define bpmn_activity {
   box wid 1 ht 0.75 rad 0.02 $1
+  if ($+ >= 2) then {
+      [
+        for i = 2 to $+ do {
+          exec sprintf("if (\"$%g\" != \"\") then { icon_activity_$%g }", i, i)
+        }
+      ] with .s at B.s
+  }
 }
 
 define bpmn_task {
@@ -556,19 +604,23 @@ define bpmn_task_rule {
 
 define bpmn_process {
   [
-    B: bpmn_activity($1)
-    if ($+ >= 2) then {
-      exec "icon_process_$2(with .s at B.s)"
-    }
-  ] $3
+    B: bpmn_activity($1, $2, $3, $4, $5, $6, $7, $8, $9)
+  ]
 }
 
 define bpmn_process_collapsed {
-    bpmn_process($1, collapsed)
+    bpmn_process($1, collapsed, $2, $3, $4, $5, $6, $7, $8, $9)
 }
 
 define bpmn_process_expanded {
-  box wid $1 ht $2 rad 0.02 $3
+  box wid $1 ht $2 rad 0.02
+  if ($+ >= 3) then {
+      [
+        for i = 2 to $+ do {
+          exec sprintf("if (\"$%g\" != \"\") then { icon_activity_$%g }", i, i)
+        }
+      ] with .s at B.s
+  }
 }
 
 # vim: syntax=pic
@@ -744,7 +796,11 @@ define Task {
 }
 
 define SubProcess {
-    bpmn_process($1, $2, $3)
+    bpmn_process_collapsed($1, $2, $3, $4, $5, $6, $7, $8, $9)
+}
+
+define SubProcessExpanded { # width, # height, markers ...
+    bpmn_process_expanded($1, $2, $3, $4, $5, $6, $7, $8, $9)
 }
 
 

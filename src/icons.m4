@@ -75,18 +75,7 @@ define icon_event_parallel { # fg, bg, attr
 }
 
 define icon_event_compensation { # fg, bg, attr
-  [
-    w = 0.2
-    h = w/sqrt(3)
-    P1: (-w/2,    0)
-    P2: (   0,  h/2)
-    P3: (   0, -h/2)
-    P4: (   0,    0)
-    P5: ( w/2,  h/2)
-    P6: ( w/2, -h/2)
-    line from P1 to P2 then to P3 then to P1 $2
-    line from P4 to P5 then to P6 then to P4 $2
-  ] with .c at Here $3
+  [ rewind(0.2) ] with .c at Here $3
 }
 
 define icon_event_terminate { # fg, bg, attr
@@ -180,10 +169,43 @@ define icon_task_rule {
     table(0.075)
 }
 
-define icon_process_collapsed {
+define icon_activity_collapsed {
   [
     box width 0.15 height 0.15
     line from last box.n - (0, 0.02) to last box.s + (0, 0.02)
     line from last box.w + (0.02, 0) to last box.e - (0.02, 0)
   ] $1
+}
+
+define icon_activity_loop {
+  [
+    arc ccw from (0.03, 0) to (-0.03, 0) with .c at (0, 0.07)
+    line from (-0.09, 0.02) to (-0.03, 0) then to (-0.04, 0.05)
+  ] $1
+}
+
+define icon_activity_compensation {
+  [ rewind(0.15) ] $1
+}
+
+define icon_activity_sequential {
+  [
+    B: box width 0.15 height 0.15 invisible
+    line from 1/3 <B.sw, B.w> to 1/3 <B.se, B.e>
+    line from B.w to B.e
+    line from 1/3 <B.nw, B.w> to 1/3 <B.ne, B.e>
+  ] $1
+}
+
+define icon_activity_parallel {
+  [
+    B: box width 0.15 height 0.15 invisible
+    line from 1/3 <B.nw, B.n> to 1/3 <B.sw, B.s>
+    line from B.n to B.s
+    line from 1/3 <B.ne, B.n> to 1/3 <B.se, B.s>
+  ] $1
+}
+
+define icon_activity_ad_hoc {
+  [ tilde(0.15) ] $1
 }

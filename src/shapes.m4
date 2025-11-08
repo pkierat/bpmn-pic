@@ -189,3 +189,26 @@ define table { # radius
   ]
 }
 
+define rewind { # width
+  [
+    w = $1
+    h = w/sqrt(3)
+    B: box width w height w with .c at (0, 0) invisible
+    P1: (-w/2,    0) - (0.03, 0)
+    P2: (   0,  h/2) - (0.03, 0)
+    P3: (   0, -h/2) - (0.03, 0)
+    P4: (   0,    0) - (0.03, 0)
+    P5: ( w/2,  h/2) - (0.03, 0)
+    P6: ( w/2, -h/2) - (0.03, 0)
+    line from P1 to P2 then to P3 then to P1 $2
+    line from P4 to P5 then to P6 then to P4 $2
+  ]
+}
+
+define tilde { # width
+  [
+    B: box wid $1 ht $1  with .c at Here invisible
+    arc cw at ((B.sw.x + B.s.x)/2, B.s.y + 0.05) from B.w to B.c thick 2
+    arc ccw at ((B.s.x + B.se.x)/2, B.n.y - 0.05) from B.c to B.e thick 2
+  ]
+}

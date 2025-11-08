@@ -2,6 +2,13 @@
 
 define bpmn_activity {
   box wid 1 ht 0.75 rad 0.02 $1
+  if ($+ >= 2) then {
+      [
+        for i = 2 to $+ do {
+          exec sprintf("if (\"$%g\" != \"\") then { icon_activity_$%g }", i, i)
+        }
+      ] with .s at B.s
+  }
 }
 
 define bpmn_task {
@@ -48,17 +55,21 @@ define bpmn_task_rule {
 
 define bpmn_process {
   [
-    B: bpmn_activity($1)
-    if ($+ >= 2) then {
-      exec "icon_process_$2(with .s at B.s)"
-    }
-  ] $3
+    B: bpmn_activity($1, $2, $3, $4, $5, $6, $7, $8, $9)
+  ]
 }
 
 define bpmn_process_collapsed {
-    bpmn_process($1, collapsed)
+    bpmn_process($1, collapsed, $2, $3, $4, $5, $6, $7, $8, $9)
 }
 
 define bpmn_process_expanded {
-  box wid $1 ht $2 rad 0.02 $3
+  box wid $1 ht $2 rad 0.02
+  if ($+ >= 3) then {
+      [
+        for i = 2 to $+ do {
+          exec sprintf("if (\"$%g\" != \"\") then { icon_activity_$%g }", i, i)
+        }
+      ] with .s at B.s
+  }
 }

@@ -37,7 +37,11 @@ define Task {
 }
 
 define SubProcess {
-    bpmn_process($1, $2, $3)
+    bpmn_process_collapsed($1, $2, $3, $4, $5, $6, $7, $8, $9)
+}
+
+define SubProcessExpanded { # width, # height, markers ...
+    bpmn_process_expanded($1, $2, $3, $4, $5, $6, $7, $8, $9)
 }
 
 
