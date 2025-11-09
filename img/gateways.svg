@@ -1,41 +1,60 @@
-<?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg fill='none' font-size='11pt' height='132.84px' preserveAspectRatio='xMidYMid meet' xml:space='preserve' stroke='black' stroke-miterlimit='10' stroke-width='1.066667' style='shape-rendering:geometricPrecision; text-rendering:geometricPrecision;
- image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd' text-anchor='middle' viewBox='0 0 492.8 132.84' width='492.8px' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg'>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: dpic version 2025.08.01 option -v for SVG 1.1 -->
+<!-- width="494" height="134" -->
+<svg
+ xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+ xml:space="preserve"
+ style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision;
+ image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+ width="492.8px" height="132.84px"
+ viewBox="0 0 492.8 132.84"
+ font-size="11pt" text-anchor="middle"
+ stroke="black" stroke-miterlimit="10" stroke-width="1.066667" fill="none">
 <g>
-<polyline points='20.266667,14.973333 39.466667,34.173333
+<polyline points="20.266667,14.973333 39.466667,34.173333
 20.266667,53.373333
 1.066667,34.173333
-20.266667,14.973333'/>
-<text fill='black' font-size='11pt' stroke-width='0.266667' x='20.266667' y='10.213333'>none</text>
-<polyline points='154.666667,14.973333 173.866667,34.173333
+20.266667,14.973333" />
+<text font-size="11pt" stroke-width="0.266667"
+ fill="black"
+ x="20.266667" y="10.213333">none</text>
+<polyline points="154.666667,14.973333 173.866667,34.173333
 154.666667,53.373333
 135.466667,34.173333
-154.666667,14.973333'/>
-<rect fill='white' height='17.28' stroke='white' width='17.28' x='146.026667' y='25.533333'/>
-<polyline fill='black' points='146.026667,25.533333
+154.666667,14.973333" />
+<rect fill="white" stroke="white"
+ x="146.026667" y="25.533333" width="17.28" height="17.28" />
+<polyline stroke-width="0" fill="black"
+ points="146.026667,25.533333
 158.986667,42.813333
 163.306667,42.813333
 150.346667,25.533333
-146.026667,25.533333' stroke-width='0'/>
-<polyline points='146.026667,25.533333 158.986667,42.813333
+146.026667,25.533333" />
+<polyline points="146.026667,25.533333 158.986667,42.813333
 163.306667,42.813333
 150.346667,25.533333
-146.026667,25.533333'/>
-<polyline fill='black' points='163.306667,25.533333
+146.026667,25.533333" />
+<polyline stroke-width="0" fill="black"
+ points="163.306667,25.533333
 150.346667,42.813333
 146.026667,42.813333
 158.986667,25.533333
-163.306667,25.533333' stroke-width='0'/>
-<polyline points='163.306667,25.533333 150.346667,42.813333
+163.306667,25.533333" />
+<polyline points="163.306667,25.533333 150.346667,42.813333
 146.026667,42.813333
 158.986667,25.533333
-163.306667,25.533333'/>
-<text fill='black' font-size='11pt' stroke-width='0.266667' x='154.666667' y='10.213333'>exclusive</text>
-<polyline points='289.066667,14.973333 308.266667,34.173333
+163.306667,25.533333" />
+<text font-size="11pt" stroke-width="0.266667"
+ fill="black"
+ x="154.666667" y="10.213333">exclusive</text>
+<polyline points="289.066667,14.973333 308.266667,34.173333
 289.066667,53.373333
 269.866667,34.173333
-289.066667,14.973333'/>
-<polyline fill='black' points='287.482667,43.677333
+289.066667,14.973333" />
+<polyline stroke-width="0" fill="black"
+ points="287.482667,43.677333
 290.650667,43.677333
 290.650667,35.757333
 298.570667,35.757333
@@ -48,8 +67,8 @@
 279.562667,35.757333
 287.482667,35.757333
 287.482667,43.677333
-287.482667,43.677333' stroke-width='0'/>
-<polyline points='287.482667,43.677333 290.650667,43.677333
+287.482667,43.677333" />
+<polyline points="287.482667,43.677333 290.650667,43.677333
 290.650667,35.757333
 298.570667,35.757333
 298.570667,32.589333
@@ -61,65 +80,85 @@
 279.562667,35.757333
 287.482667,35.757333
 287.482667,43.677333
-287.482667,43.677333'/>
-<text fill='black' font-size='11pt' stroke-width='0.266667' x='289.066667' y='10.213333'>parallel</text>
-<polyline points='423.466667,14.973333 442.666667,34.173333
+287.482667,43.677333" />
+<text font-size="11pt" stroke-width="0.266667"
+ fill="black"
+ x="289.066667" y="10.213333">parallel</text>
+<polyline points="423.466667,14.973333 442.666667,34.173333
 423.466667,53.373333
 404.266667,34.173333
-423.466667,14.973333'/>
-<circle cx='423.466667' cy='34.173333' r='9.6' stroke-width='3.333333'/>
-<text fill='black' font-size='11pt' stroke-width='0.266667' x='423.466667' y='10.213333'>inclusive</text>
-<polyline points='20.266667,91.773333 39.466667,110.973333
+423.466667,14.973333" />
+<circle stroke-width="3.333333"
+ cx="423.466667" cy="34.173333" r="9.6" />
+<text font-size="11pt" stroke-width="0.266667"
+ fill="black"
+ x="423.466667" y="10.213333">inclusive</text>
+<polyline points="20.266667,91.773333 39.466667,110.973333
 20.266667,130.173333
 1.066667,110.973333
-20.266667,91.773333'/>
-<circle cx='20.266667' cy='110.973333' fill='white' r='9.6' stroke='white'/>
-<line stroke-width='2.666667' x1='20.266667' x2='20.266667' y1='101.373333' y2='120.573333'/>
-<line stroke-width='2.666667' x1='10.666667' x2='29.866667' y1='110.973333' y2='110.973333'/>
-<line stroke-width='2.666667' x1='13.478442' x2='27.054892' y1='104.185108' y2='117.761558'/>
-<line stroke-width='2.666667' x1='13.478442' x2='27.054892' y1='117.761558' y2='104.185108'/>
-<text fill='black' font-size='11pt' stroke-width='0.266667' x='20.266667' y='87.013333'>complex</text>
-<polyline points='154.666667,91.773333 173.866667,110.973333
+20.266667,91.773333" />
+<circle fill="white" stroke="white"
+ cx="20.266667" cy="110.973333" r="9.6" />
+<line stroke-width="2.666667"
+ x1="20.266667" y1="101.373333" x2="20.266667" y2="120.573333" />
+<line stroke-width="2.666667"
+ x1="10.666667" y1="110.973333" x2="29.866667" y2="110.973333" />
+<line stroke-width="2.666667"
+ x1="13.478442" y1="104.185108" x2="27.054892" y2="117.761558" />
+<line stroke-width="2.666667"
+ x1="13.478442" y1="117.761558" x2="27.054892" y2="104.185108" />
+<text font-size="11pt" stroke-width="0.266667"
+ fill="black"
+ x="20.266667" y="87.013333">complex</text>
+<polyline points="154.666667,91.773333 173.866667,110.973333
 154.666667,130.173333
 135.466667,110.973333
-154.666667,91.773333'/>
-<circle cx='154.666667' cy='110.973333' r='9.6'/>
-<polyline fill='white' points='154.666667,104.733333
+154.666667,91.773333" />
+<circle cx="154.666667" cy="110.973333" r="9.6" />
+<polyline stroke-width="0" fill="white"
+ points="154.666667,104.733333
 148.732427,109.045173
 150.997547,116.021493
 158.335787,116.021493
 160.600907,109.045173
-154.666667,104.733333' stroke-width='0'/>
-<polyline points='154.666667,104.733333 148.732427,109.045173
+154.666667,104.733333" />
+<polyline points="154.666667,104.733333 148.732427,109.045173
 150.997547,116.021493
 158.335787,116.021493
 160.600907,109.045173
-154.666667,104.733333'/>
-<text fill='black' font-size='11pt' stroke-width='0.266667' x='154.666667' y='87.013333'>event_based</text>
-<polyline points='289.066667,91.773333 308.266667,110.973333
+154.666667,104.733333" />
+<text font-size="11pt" stroke-width="0.266667"
+ fill="black"
+ x="154.666667" y="87.013333">event_based</text>
+<polyline points="289.066667,91.773333 308.266667,110.973333
 289.066667,130.173333
 269.866667,110.973333
-289.066667,91.773333'/>
-<circle cx='289.066667' cy='110.973333' r='9.6'/>
-<circle cx='289.066667' cy='110.973333' r='7.68'/>
-<polyline fill='white' points='289.066667,104.733333
+289.066667,91.773333" />
+<circle cx="289.066667" cy="110.973333" r="9.6" />
+<circle cx="289.066667" cy="110.973333" r="7.68" />
+<polyline stroke-width="0" fill="white"
+ points="289.066667,104.733333
 283.132427,109.045173
 285.397547,116.021493
 292.735787,116.021493
 295.000907,109.045173
-289.066667,104.733333' stroke-width='0'/>
-<polyline points='289.066667,104.733333 283.132427,109.045173
+289.066667,104.733333" />
+<polyline points="289.066667,104.733333 283.132427,109.045173
 285.397547,116.021493
 292.735787,116.021493
 295.000907,109.045173
-289.066667,104.733333'/>
-<text fill='black' font-size='11pt' stroke-width='0.266667' x='289.066667' y='87.013333'>event_based_exclusive</text>
-<polyline points='423.466667,91.773333 442.666667,110.973333
+289.066667,104.733333" />
+<text font-size="11pt" stroke-width="0.266667"
+ fill="black"
+ x="289.066667" y="87.013333">event_based_exclusive</text>
+<polyline points="423.466667,91.773333 442.666667,110.973333
 423.466667,130.173333
 404.266667,110.973333
-423.466667,91.773333'/>
-<circle cx='423.466667' cy='110.973333' r='9.6'/>
-<polyline fill='white' points='422.674667,115.725333
+423.466667,91.773333" />
+<circle cx="423.466667" cy="110.973333" r="9.6" />
+<polyline stroke-width="0" stroke="black"
+ fill="white"
+ points="422.674667,115.725333
 424.258667,115.725333
 424.258667,111.765333
 428.218667,111.765333
@@ -132,8 +171,9 @@
 418.714667,111.765333
 422.674667,111.765333
 422.674667,115.725333
-422.674667,115.725333' stroke='black' stroke-width='0'/>
-<polyline points='422.674667,115.725333 424.258667,115.725333
+422.674667,115.725333" />
+<polyline stroke="black"
+ points="422.674667,115.725333 424.258667,115.725333
 424.258667,111.765333
 428.218667,111.765333
 428.218667,110.181333
@@ -145,6 +185,8 @@
 418.714667,111.765333
 422.674667,111.765333
 422.674667,115.725333
-422.674667,115.725333' stroke='black'/>
-<text fill='black' font-size='11pt' stroke-width='0.266667' x='423.466667' y='87.013333'>event_based_parallel</text>
+422.674667,115.725333" />
+<text font-size="11pt" stroke-width="0.266667"
+ fill="black"
+ x="423.466667" y="87.013333">event_based_parallel</text>
 </g></svg>

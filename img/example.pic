@@ -1,0 +1,78 @@
+.PS
+copy "bpmn.pic"
+
+down
+
+DSP: [
+    HorizontalBlackBoxPool(10, 0.5, "Delivery Service Provider")
+] with .nw at (0, 0)
+
+move
+
+InventoryPool: Pool(10, 1.5, []) ; { Text("Inventory", InventoryPool.Label.c, -90) }
+OrdersPool:    Pool(10, 1.5, []) ; { Text("Orders", OrdersPool.Label.c, -90) }
+PaymentsPool:  Pool(10, 2, [])   ; { Text("Payments", PaymentsPool.Label.c, -90) }
+
+Orders: [
+    right
+    Start(none); SequenceFlow()
+    CreateOrder: Task("Create" "order"); SequenceFlow()
+    OrderCreated: Throwing(message); SequenceFlow()
+    PaymentCaptured: Catching(message); SequenceFlow()
+    ShipOrder: Task("Ship" "order"); SequenceFlow()
+    OrderDelivered: Catching(message); SequenceFlow()
+    CloseOrder: Task("Close" "order"); SequenceFlow()
+    End(message)
+    down
+] with .w at OrdersPool.Content.w + (0.5, 0)
+
+Inventory: [
+    right
+    OrderCreated: Start(message);
+    SequenceFlow();
+    ReserveStock: Task("Reserve" "stock")
+    SequenceFlow(0.9);
+    StockReserved: Throwing(message); SequenceFlow()
+    OrderClosed: Catching(message); SequenceFlow()
+    DeductFromStock: Task("Deduct from" "stock"); SequenceFlow()
+    End(none)
+    down
+] with .w at (Orders.OrderCreated.w.x, InventoryPool.Content.w.y)
+
+Payments: [
+    right
+    OrderCreated: Start(message)
+    SequenceFlow()
+    RequestPaymentGateway: bpmn_gateway_parallel()
+    move to (RequestPaymentGateway.w.x, RequestPaymentGateway.n.y + 0.7)
+    StockReserved: Start(message)
+    SequenceFlow(from StockReserved.s to RequestPaymentGateway.n)
+    SequenceFlow(from RequestPaymentGateway.e right)
+    RequestPayment: Task("Request" "payment")
+    SequenceFlow()
+    PaymentInitiated: Catching(message)
+    SequenceFlow()
+    CapturePayment: Task("Capture" "payment")
+    SequenceFlow()
+    PaymentCompleted: End(message)
+    down
+] with .w at  (Orders.OrderCreated.w.x, PaymentsPool.Content.w.y)
+
+PSP: [
+    HorizontalBlackBoxPool(10, 0.5, "Payment Service Provider")
+] with .nw at PaymentsPool.sw - (0, 0.5)
+
+MessageFlow(from Orders.OrderCreated.n to Inventory.OrderCreated.s)
+MessageFlow(from Orders.OrderCreated.s to Payments.OrderCreated.n)
+
+MessageFlow(from Inventory.StockReserved.s \
+        to (Inventory.StockReserved.c.x, Payments.StockReserved.c.y),
+        to Payments.StockReserved.e)
+
+MessageFlow(from Payments.RequestPayment.s to (Payments.RequestPayment.s.x, PSP.n.y))
+MessageFlow(from (Payments.PaymentInitiated.s.x, PSP.n.y) to Payments.PaymentInitiated.s)
+MessageFlow(from Payments.CapturePayment.s to (Payments.CapturePayment.s.x, PSP.n.y))
+
+MessageFlow(from Orders.ShipOrder.n to (Orders.ShipOrder.n.x, DSP.s.y))
+MessageFlow(from (Orders.OrderDelivered.n.x, DSP.s.y) to Orders.OrderDelivered.n)
+.PE

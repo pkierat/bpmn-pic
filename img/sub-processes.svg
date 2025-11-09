@@ -1,61 +1,86 @@
-<?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg fill='none' font-size='11pt' height='183.24px' preserveAspectRatio='xMidYMid meet' xml:space='preserve' stroke='black' stroke-miterlimit='10' stroke-width='1.066667' style='shape-rendering:geometricPrecision; text-rendering:geometricPrecision;
- image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd' text-anchor='middle' viewBox='0 0 435.2 183.24' width='435.2px' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg'>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: dpic version 2025.08.01 option -v for SVG 1.1 -->
+<!-- width="388" height="184" -->
+<svg
+ xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+ xml:space="preserve"
+ style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision;
+ image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+ width="387.2px" height="183.24px"
+ viewBox="0 0 387.2 183.24"
+ font-size="11pt" text-anchor="middle"
+ stroke="black" stroke-miterlimit="10" stroke-width="1.066667" fill="none">
 <g>
-<rect height='72' rx='1.92' ry='1.92' width='96' x='1.066667' y='14.973333'/>
-<text fill='black' font-size='11pt' stroke-width='0.2pt' x='49.066667' y='55.813333'/>
-<rect height='14.4' width='14.4' x='41.866667' y='72.573333'/>
-<line x1='49.066667' x2='49.066667' y1='74.493333' y2='85.053333'/>
-<line x1='43.786667' x2='54.346667' y1='79.773333' y2='79.773333'/>
-<text fill='black' font-size='11pt' stroke-width='0.266667' x='49.066667' y='10.213333'/>
-<rect height='72' rx='1.92' ry='1.92' width='96' x='145.066667' y='14.973333'/>
-<text fill='black' font-size='11pt' stroke-width='0.2pt' x='193.066667' y='55.813333'/>
-<rect height='14.4' width='14.4' x='178.666667' y='72.573333'/>
-<line x1='185.866667' x2='185.866667' y1='74.493333' y2='85.053333'/>
-<line x1='180.586667' x2='191.146667' y1='79.773333' y2='79.773333'/>
-<line x1='193.066667' x2='207.466667' y1='84.573333' y2='84.573333'/>
-<line x1='193.066667' x2='207.466667' y1='79.773333' y2='79.773333'/>
-<line x1='193.066667' x2='207.466667' y1='74.973333' y2='74.973333'/>
-<text fill='black' font-size='11pt' stroke-width='0.266667' x='193.066667' y='10.213333'>sequential</text>
-<rect height='72' rx='1.92' ry='1.92' width='96' x='289.066667' y='14.973333'/>
-<text fill='black' font-size='11pt' stroke-width='0.2pt' x='337.066667' y='55.813333'/>
-<rect height='14.4' width='14.4' x='322.666667' y='72.573333'/>
-<line x1='329.866667' x2='329.866667' y1='74.493333' y2='85.053333'/>
-<line x1='324.586667' x2='335.146667' y1='79.773333' y2='79.773333'/>
-<line x1='339.466667' x2='339.466667' y1='72.573333' y2='86.973333'/>
-<line x1='344.266667' x2='344.266667' y1='72.573333' y2='86.973333'/>
-<line x1='349.066667' x2='349.066667' y1='72.573333' y2='86.973333'/>
-<text fill='black' font-size='11pt' stroke-width='0.266667' x='337.066667' y='10.213333'>parallel</text>
-<rect height='72' rx='1.92' ry='1.92' width='96' x='1.066667' y='108.573333'/>
-<text fill='black' font-size='11pt' stroke-width='0.2pt' x='49.066667' y='149.413333'/>
-<rect height='14.4' width='14.4' x='33.891096' y='166.173333'/>
-<line x1='41.091096' x2='41.091096' y1='168.093333' y2='178.653333'/>
-<line x1='35.811096' x2='46.371096' y1='173.373333' y2='173.373333'/>
-<path d='M 59.811096,180.388904
- A 7.311142 7.311142 0 1 0 54.051096,180.388904'/>
-<polyline points='48.291096,178.468904 54.051096,180.388904
-53.091096,175.588904'/>
-<text fill='black' font-size='11pt' stroke-width='0.266667' x='49.066667' y='103.813333'>loop</text>
-<rect height='72' rx='1.92' ry='1.92' width='96' x='145.066667' y='108.573333'/>
-<text fill='black' font-size='11pt' stroke-width='0.2pt' x='193.066667' y='149.413333'/>
-<rect height='14.4' width='14.4' x='177.226667' y='166.173333'/>
-<line x1='184.426667' x2='184.426667' y1='168.093333' y2='178.653333'/>
-<line x1='179.146667' x2='189.706667' y1='173.373333' y2='173.373333'/>
-<polyline points='191.626667,173.373333 198.826667,169.216411
+<rect x="1.066667" y="14.973333" rx="1.92" ry="1.92" width="96" height="72" />
+<text font-size="11pt" stroke-width="0.2pt" fill="black" x="49.066667" y="55.813333"></text>
+<rect x="41.866667" y="72.573333" width="14.4" height="14.4" />
+<line x1="49.066667" y1="74.493333" x2="49.066667" y2="85.053333" />
+<line x1="43.786667" y1="79.773333" x2="54.346667" y2="79.773333" />
+<text font-size="11pt" stroke-width="0.266667"
+ fill="black"
+ x="49.066667" y="10.213333"></text>
+<rect x="145.066667" y="14.973333" rx="1.92" ry="1.92" width="96" height="72" />
+<text font-size="11pt" stroke-width="0.2pt" fill="black" x="193.066667" y="55.813333"></text>
+<rect x="178.666667" y="72.573333" width="14.4" height="14.4" />
+<line x1="185.866667" y1="74.493333" x2="185.866667" y2="85.053333" />
+<line x1="180.586667" y1="79.773333" x2="191.146667" y2="79.773333" />
+<line x1="193.066667" y1="84.573333" x2="207.466667" y2="84.573333" />
+<line x1="193.066667" y1="79.773333" x2="207.466667" y2="79.773333" />
+<line x1="193.066667" y1="74.973333" x2="207.466667" y2="74.973333" />
+<text font-size="11pt" stroke-width="0.266667"
+ fill="black"
+ x="193.066667" y="10.213333">sequential</text>
+<rect x="289.066667" y="14.973333" rx="1.92" ry="1.92" width="96" height="72" />
+<text font-size="11pt" stroke-width="0.2pt" fill="black" x="337.066667" y="55.813333"></text>
+<rect x="322.666667" y="72.573333" width="14.4" height="14.4" />
+<line x1="329.866667" y1="74.493333" x2="329.866667" y2="85.053333" />
+<line x1="324.586667" y1="79.773333" x2="335.146667" y2="79.773333" />
+<line x1="339.466667" y1="72.573333" x2="339.466667" y2="86.973333" />
+<line x1="344.266667" y1="72.573333" x2="344.266667" y2="86.973333" />
+<line x1="349.066667" y1="72.573333" x2="349.066667" y2="86.973333" />
+<text font-size="11pt" stroke-width="0.266667"
+ fill="black"
+ x="337.066667" y="10.213333">parallel</text>
+<rect x="1.066667" y="108.573333" rx="1.92" ry="1.92" width="96" height="72" />
+<text font-size="11pt" stroke-width="0.2pt" fill="black" x="49.066667" y="149.413333"></text>
+<rect x="33.891096" y="166.173333" width="14.4" height="14.4" />
+<line x1="41.091096" y1="168.093333" x2="41.091096" y2="178.653333" />
+<line x1="35.811096" y1="173.373333" x2="46.371096" y2="173.373333" />
+<path d="M 59.811096,180.388904
+ A 7.311142 7.311142 0 1 0 54.051096,180.388904" />
+<polyline points="48.291096,178.468904 54.051096,180.388904
+53.091096,175.588904" />
+<text font-size="11pt" stroke-width="0.266667"
+ fill="black"
+ x="49.066667" y="103.813333">loop</text>
+<rect x="145.066667" y="108.573333" rx="1.92" ry="1.92" width="96" height="72" />
+<text font-size="11pt" stroke-width="0.2pt" fill="black" x="193.066667" y="149.413333"></text>
+<rect x="177.226667" y="166.173333" width="14.4" height="14.4" />
+<line x1="184.426667" y1="168.093333" x2="184.426667" y2="178.653333" />
+<line x1="179.146667" y1="173.373333" x2="189.706667" y2="173.373333" />
+<polyline points="191.626667,173.373333 198.826667,169.216411
 198.826667,177.530255
-191.626667,173.373333'/>
-<polyline points='198.826667,173.373333 206.026667,169.216411
+191.626667,173.373333" />
+<polyline points="198.826667,173.373333 206.026667,169.216411
 206.026667,177.530255
-198.826667,173.373333'/>
-<text fill='black' font-size='11pt' stroke-width='0.266667' x='193.066667' y='103.813333'>compensation</text>
-<rect height='72' rx='1.92' ry='1.92' width='96' x='289.066667' y='108.573333'/>
-<text fill='black' font-size='11pt' stroke-width='0.2pt' x='337.066667' y='149.413333'/>
-<rect height='14.4' width='14.4' x='322.666667' y='166.173333'/>
-<line x1='329.866667' x2='329.866667' y1='168.093333' y2='178.653333'/>
-<line x1='324.586667' x2='335.146667' y1='173.373333' y2='173.373333'/>
-<path d='M 337.066667,173.373333
- A 4.326662 4.326662 0 0 1 344.266667,173.373333' stroke-width='2.666667'/>
-<path d='M 344.266667,173.373333
- A 4.326662 4.326662 0 0 0 351.466667,173.373333' stroke-width='2.666667'/>
-<text fill='black' font-size='11pt' stroke-width='0.266667' x='337.066667' y='103.813333'>ad_hoc</text>
+198.826667,173.373333" />
+<text font-size="11pt" stroke-width="0.266667"
+ fill="black"
+ x="193.066667" y="103.813333">compensation</text>
+<rect x="289.066667" y="108.573333" rx="1.92" ry="1.92" width="96" height="72" />
+<text font-size="11pt" stroke-width="0.2pt" fill="black" x="337.066667" y="149.413333"></text>
+<rect x="322.666667" y="166.173333" width="14.4" height="14.4" />
+<line x1="329.866667" y1="168.093333" x2="329.866667" y2="178.653333" />
+<line x1="324.586667" y1="173.373333" x2="335.146667" y2="173.373333" />
+<path stroke-width="2.666667"
+ d="M 337.066667,173.373333
+ A 4.326662 4.326662 0 0 1 344.266667,173.373333" />
+<path stroke-width="2.666667"
+ d="M 344.266667,173.373333
+ A 4.326662 4.326662 0 0 0 351.466667,173.373333" />
+<text font-size="11pt" stroke-width="0.266667"
+ fill="black"
+ x="337.066667" y="103.813333">ad_hoc</text>
 </g></svg>

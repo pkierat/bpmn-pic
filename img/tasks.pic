@@ -1,0 +1,15 @@
+.PS
+copy "bpmn.pic"
+
+T1: Task("", none);    { "none"    with .c at T1.n + (0, 0.1) }; move right;
+T2: Task("", send);    { "send"    with .c at T2.n + (0, 0.1) }; move right;
+T3: Task("", receive); { "receive" with .c at T3.n + (0, 0.1) }; move right;
+T4: Task("", manual);  { "manual"  with .c at T4.n + (0, 0.1) }; 
+
+move to T1.sw + (0, -0.6)
+
+T5: Task("", service); { "service" with .c at T5.n + (0, 0.1) }; move right;
+T6: Task("", user);    { "user"    with .c at T6.n + (0, 0.1) }; move right;
+T7: Task("", script);  { "script"  with .c at T7.n + (0, 0.1) }; move right;
+T8: Task("", rule);    { "rule"    with .c at T8.n + (0, 0.1) }; 
+.PE

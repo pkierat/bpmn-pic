@@ -8,22 +8,28 @@
 
 = bpmn.pic
 
-`bpmn.pic` is a collection of https://gitlab.com/aplevich/dpic[DPIC] macros for generating BPMN 2.0 diagrams (as images) for use in various kinds of documents and presentations. Although the library focuses on supporting SVG as the primary output format, most of the elements (except pools and lanes) should also work with other DPIC formats.
+`bpmn.pic` is a collection of https://gitlab.com/aplevich/dpic[DPIC] macros for generating BPMN 2.0 diagram images for use in various kinds of documents and presentations.
+
+Although the library focuses on supporting SVG as the primary output format, most of the elements (except pools and lanes) should also work with other DPIC formats.
 
 Currently supported BPMN element types include:
 
 * **Events**: start, non-interrupting, catching, boundary, throwing, end;
 * **Tasks**: none, receive, send, manual, service, user, script, rule;
-* **Sub-Processes**: collapsed, expanded;
+* **Sub-Processes**: collapsed, sequential, parallel, loop, compensation, ad-hoc, expanded;
 * **Gateways**: none, exclusive, parallel, inclusive, event-based (exclusive, parallel);
 * **Flows**: sequence flow, default condition flow, conditional flow, message flow;
 * **Pools**: horizontal pools and lanes, horizontal black box pools.
 
 NOTE: The goal of `bpmn.pic` is to provide just the visual layer of BPMN 2.0. If you need full support for BPMN 2.0-compatible XML, please try other tools (like https://bpmn.io[bpmn.io]) instead.
 
+== Resources
+
+* https://gitlab.com/aplevich/dpic/-/blob/master/dpic-doc.pdf[DPIC documentation]
+
 == Installation
 
-Download `bpmn.pic` from https://gitlab.com/pkierat/bpmn-pic[GitLab]:
+Download `bpmn.pic` from https://gitlab.com/pkierat/bpmn-pic[here]:
 
 ----
 $ wget https://gitlab.com/pkierat/bpmn-pic/-/raw/master/bpmn.pic
@@ -85,6 +91,10 @@ Start(none); SequenceFlow(); Task("Task"); SequenceFlow(); End(none)
 $ dpic -v diagram.pic > diagram.svg
 ----
 
+The output SVG should look like below:
+
+image::diagram.svg[align="center"]
+
 <<<
 
 == Macros
@@ -133,240 +143,33 @@ $ dpic -v diagram.pic > diagram.svg
 
 === Events
 
-[dpic,events,pdfwidth="100%",align="center"]
-----
-copy "bpmn.pic"
-
-define event_types { # types ...
-    cwd = 1
-    cht = 0.5
-    n = $+
-
-    down
-    [
-        right
-        for j = 1 to 7 do {
-            R[j]: box width cwd height cht invisible
-        }
-        [ "Type"                        ] with .c at R[1].c
-        [ "Start"                       ] with .c at R[2].c
-        [ "Start" "non-interrupting"    ] with .c at R[3].c
-        [ "Catching"                    ] with .c at R[4].c
-        [ "Boundary" "non-interrupting" ] with .c at R[5].c
-        [ "Throwing"                    ] with .c at R[6].c
-        [ "End"                         ] with .c at R[7].c
-    ]
-    for i = 1 to n do {
-        [
-            right
-            for j = 1 to 7 do {
-                R[j]: box width cwd height cht invisible
-            }
-            [ exec sprintf("\"$%g\"", i);                      ] with .c at R[1].c
-            [ exec sprintf("Start($%g)", i);                   ] with .c at R[2].c
-            [ exec sprintf("StartNonInterrupting($%g)", i);    ] with .c at R[3].c
-            [ exec sprintf("Catching($%g)", i);                ] with .c at R[4].c
-            [ exec sprintf("BoundaryNonInterrupting($%g)", i); ] with .c at R[5].c
-            [ exec sprintf("Throwing($%g)", i);                ] with .c at R[6].c
-            [ exec sprintf("End($%g)", i);                     ] with .c at R[7].c
-        ]
-    }
-    right
-}
-
-event_types(\
-none, message, timer, signal, multiple, conditional, link,\
-escalation, error, cancel, parallel, compensation, terminate\
-)
-----
+image::events.svg[pdfwidth="90%",align="center"]
 
 <<<
 
 === Gateways
 
-[dpic,gateways,pdfwidth="90%",align="center"]
-----
-copy "bpmn.pic"
-
-G1: Gateway(none);                  { "none"                  with .c at G1.n + (0, 0.1) }; move right 1;
-G2: Gateway(exclusive);             { "exclusive"             with .c at G2.n + (0, 0.1) }; move right 1;
-G3: Gateway(parallel);              { "parallel"              with .c at G3.n + (0, 0.1) }; move right 1;
-G4: Gateway(inclusive);             { "inclusive"             with .c at G4.n + (0, 0.1) }; move right 0.5;
-
-move to G1.sw + (0, -0.6)
-
-G5: Gateway(complex);               { "complex"               with .c at G5.n + (0, 0.1) }; move right 1;
-G6: Gateway(event_based);           { "event_based"           with .c at G6.n + (0, 0.1) }; move right 1;
-G7: Gateway(event_based_exclusive); { "event_based_exclusive" with .c at G7.n + (0, 0.1) }; move right 1;
-G8: Gateway(event_based_parallel);  { "event_based_parallel"  with .c at G8.n + (0, 0.1) }; move right 0.5;
-----
+image::gateways.svg[pdfwidth="90%",align="center"]
 
 === Activities
 
 ==== Tasks
 
-[dpic,tasks,pdfwidth="90%",align="center"]
-----
-copy "bpmn.pic"
-
-T1: Task("", none);    { "none"    with .c at T1.n + (0, 0.1) }; move right;
-T2: Task("", send);    { "send"    with .c at T2.n + (0, 0.1) }; move right;
-T3: Task("", receive); { "receive" with .c at T3.n + (0, 0.1) }; move right;
-T4: Task("", manual);  { "manual"  with .c at T4.n + (0, 0.1) }; 
-
-move to T1.sw + (0, -0.6)
-
-T5: Task("", service); { "service" with .c at T5.n + (0, 0.1) }; move right;
-T6: Task("", user);    { "user"    with .c at T6.n + (0, 0.1) }; move right;
-T7: Task("", script);  { "script"  with .c at T7.n + (0, 0.1) }; move right;
-T8: Task("", rule);    { "rule"    with .c at T8.n + (0, 0.1) }; 
-
-----
+image::tasks.svg[pdfwidth="90%",align="center"]
 
 ==== Sub-processes
 
-[dpic,sub-processes,pdfwidth="90%",align="center"]
-----
-copy "bpmn.pic"
-
-P1: SubProcess("");               { "" with .c at P1.n + (0, 0.1) }; move right;
-P2: SubProcess("", sequential);   { "sequential" with .c at P2.n + (0, 0.1) }; move right;
-P3: SubProcess("", parallel);     { "parallel" with .c at P3.n + (0, 0.1) }; move right;
-
-move to P1.sw + (0, -0.6)
-
-P4: SubProcess("", loop);         { "loop" with .c at P4.n + (0, 0.1) }; move right;
-P5: SubProcess("", compensation); { "compensation" with .c at P5.n + (0, 0.1) }; move right;
-P6: SubProcess("", ad_hoc);       { "ad_hoc" with .c at P6.n + (0, 0.1) }; move right;
-----
+image::sub-processes.svg[pdfwidth="90%",align="center"]
 
 ==== Flows
 
-[dpic,flows,pdfwidth="90%",align="center"]
-----
-copy "bpmn.pic"
-
-SequenceFlow(right 2); L1: last line; { "Sequence flow" at L1.c + (0, 0.1) }
-move
-DefaultFlow(right 2); L2: last line; { "Default flow" at L2.c + (0, 0.1) }
-
-move to L1.w + (0, -0.5)
-
-ConditionalFlow(right 2); L: last line; { "Conditional flow" at L.c + (0, 0.1) }
-move
-MessageFlow(right 2); L: last line; { "Message flow" at L.c + (0, 0.1) }
-----
-
-<<<
+image::flows.svg[pdfwidth="90%",align="center"]
 
 === Pools and Lanes
 
-[dpic,lanes,pdfwidth="90%",align="center"]
-----
-copy "bpmn.pic"
-
-down
-
-box width 10 height 0 with .nw at (0, 0) invisible 
-
-Pool1: Pool(10, 2, []) ; Text("Pool", Pool1.Label.c, -90)
-
-move
-
-Pool2: Pool(10, 3, [
-    Lane1: Lane(1, [])
-    Lane2: Lane(1, [])
-    Lane3: Lane(1, [])
-])
-
-Text("Pool with lanes", Pool2.Label.c, -90)
-Text("Lane 1", Pool2.Lanes.Lane1.Label.c, -90)
-Text("Lane 2", Pool2.Lanes.Lane2.Label.c, -90)
-Text("Lane 3", Pool2.Lanes.Lane3.Label.c, -90)
-----
-
-<<<
+image::pools.svg[pdfwidth="90%",align="center"]
 
 == Example
 
-[dpic,example1,align="center"]
-----
-copy "bpmn.pic"
-
-down
-
-DSP: [
-    HorizontalBlackBoxPool(10, 0.5, "Delivery Service Provider")
-] with .nw at (0, 0)
-
-move
-
-InventoryPool: Pool(10, 1.5, []) ; { Text("Inventory", InventoryPool.Label.c, -90) }
-OrdersPool:    Pool(10, 1.5, []) ; { Text("Orders", OrdersPool.Label.c, -90) }
-PaymentsPool:  Pool(10, 2, [])   ; { Text("Payments", PaymentsPool.Label.c, -90) }
-
-Orders: [
-    right
-    Start(none); SequenceFlow()
-    CreateOrder: Task("Create" "order"); SequenceFlow()
-    OrderCreated: Throwing(message); SequenceFlow()
-    PaymentCaptured: Catching(message); SequenceFlow()
-    ShipOrder: Task("Ship" "order"); SequenceFlow()
-    OrderDelivered: Catching(message); SequenceFlow()
-    CloseOrder: Task("Close" "order"); SequenceFlow()
-    End(message)
-    down
-] with .w at OrdersPool.Content.w + (0.5, 0)
-
-Inventory: [
-    right
-    OrderCreated: Start(message);
-    SequenceFlow();
-    ReserveStock: Task("Reserve" "stock")
-    SequenceFlow(0.9);
-    StockReserved: Throwing(message); SequenceFlow()
-    OrderClosed: Catching(message); SequenceFlow()
-    DeductFromStock: Task("Deduct from" "stock"); SequenceFlow()
-    End(none)
-    down
-] with .w at (Orders.OrderCreated.w.x, InventoryPool.Content.w.y)
-
-Payments: [
-    right
-    OrderCreated: Start(message)
-    SequenceFlow()
-    RequestPaymentGateway: bpmn_gateway_parallel()
-    move to (RequestPaymentGateway.w.x, RequestPaymentGateway.n.y + 0.7)
-    StockReserved: Start(message)
-    SequenceFlow(from StockReserved.s to RequestPaymentGateway.n)
-    SequenceFlow(from RequestPaymentGateway.e right)
-    RequestPayment: Task("Request" "payment")
-    SequenceFlow()
-    PaymentInitiated: Catching(message)
-    SequenceFlow()
-    CapturePayment: Task("Capture" "payment")
-    SequenceFlow()
-    PaymentCompleted: End(message)
-    down
-] with .w at  (Orders.OrderCreated.w.x, PaymentsPool.Content.w.y)
-
-PSP: [
-    HorizontalBlackBoxPool(10, 0.5, "Payment Service Provider")
-] with .nw at PaymentsPool.sw - (0, 0.5)
-
-MessageFlow(from Orders.OrderCreated.n to Inventory.OrderCreated.s)
-MessageFlow(from Orders.OrderCreated.s to Payments.OrderCreated.n)
-
-MessageFlow(from Inventory.StockReserved.s \
-        to (Inventory.StockReserved.c.x, Payments.StockReserved.c.y),
-        to Payments.StockReserved.e)
-
-MessageFlow(from Payments.RequestPayment.s to (Payments.RequestPayment.s.x, PSP.n.y))
-MessageFlow(from (Payments.PaymentInitiated.s.x, PSP.n.y) to Payments.PaymentInitiated.s)
-MessageFlow(from Payments.CapturePayment.s to (Payments.CapturePayment.s.x, PSP.n.y))
-
-MessageFlow(from Orders.ShipOrder.n to (Orders.ShipOrder.n.x, DSP.s.y))
-MessageFlow(from (Orders.OrderDelivered.n.x, DSP.s.y) to Orders.OrderDelivered.n)
-
-----
+image::example.svg[pdfwidth="90%",align="center"]
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: dpic version 2025.08.01 option -v for SVG 1.1 -->
+<!-- width="267" height="76" -->
+<svg
+ xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+ xml:space="preserve"
+ style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision;
+ image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+ width="266.24px" height="75.2px"
+ viewBox="0 0 266.24 75.2"
+ font-size="11pt" text-anchor="middle"
+ stroke="black" stroke-miterlimit="10" stroke-width="1.066667" fill="none">
+<g>
+<circle cx="20.266667" cy="36.533333" r="19.2" />
+<line x1="39.466667" y1="36.533333" x2="87.466667" y2="36.533333" />
+<polyline stroke-width="0" fill="black"
+ points="80.266667,38.933333
+80.266667,34.133333
+87.466667,36.533333
+80.266667,38.933333" />
+<polyline points="80.266667,38.933333 80.266667,34.133333
+87.466667,36.533333
+80.266667,38.933333" />
+<rect x="87.466667" y="0.533333" rx="1.92" ry="1.92" width="96" height="72" />
+<text font-size="11pt" stroke-width="0.2pt" fill="black" x="135.466667" y="41.373333">Task</text>
+<line x1="183.466667" y1="36.533333" x2="231.466667" y2="36.533333" />
+<polyline stroke-width="0" fill="black"
+ points="224.266667,38.933333
+224.266667,34.133333
+231.466667,36.533333
+224.266667,38.933333" />
+<polyline points="224.266667,38.933333 224.266667,34.133333
+231.466667,36.533333
+224.266667,38.933333" />
+<circle stroke-width="3.333333"
+ cx="247.786667" cy="36.533333" r="16.32" />
+</g></svg>

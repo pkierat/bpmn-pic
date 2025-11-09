@@ -1,0 +1,13 @@
+.PS
+copy "bpmn.pic"
+
+P1: SubProcess("");               { "" with .c at P1.n + (0, 0.1) }; move right;
+P2: SubProcess("", sequential);   { "sequential" with .c at P2.n + (0, 0.1) }; move right;
+P3: SubProcess("", parallel);     { "parallel" with .c at P3.n + (0, 0.1) }
+
+move to P1.sw + (0, -0.6)
+
+P4: SubProcess("", loop);         { "loop" with .c at P4.n + (0, 0.1) }; move right;
+P5: SubProcess("", compensation); { "compensation" with .c at P5.n + (0, 0.1) }; move right;
+P6: SubProcess("", ad_hoc);       { "ad_hoc" with .c at P6.n + (0, 0.1) }
+.PE

@@ -1,0 +1,45 @@
+.PS
+copy "bpmn.pic"
+
+define event_types { # types ...
+    cwd = 1
+    cht = 0.5
+    n = $+
+
+    down
+    [
+        right
+        for j = 1 to 7 do {
+            R[j]: box width cwd height cht invisible
+        }
+        [ "Type"                        ] with .c at R[1].c
+        [ "Start"                       ] with .c at R[2].c
+        [ "Start" "non-interrupting"    ] with .c at R[3].c
+        [ "Catching"                    ] with .c at R[4].c
+        [ "Boundary" "non-interrupting" ] with .c at R[5].c
+        [ "Throwing"                    ] with .c at R[6].c
+        [ "End"                         ] with .c at R[7].c
+    ]
+    for i = 1 to n do {
+        [
+            right
+            for j = 1 to 7 do {
+                R[j]: box width cwd height cht invisible
+            }
+            [ exec sprintf("\"$%g\"", i);                      ] with .c at R[1].c
+            [ exec sprintf("Start($%g)", i);                   ] with .c at R[2].c
+            [ exec sprintf("StartNonInterrupting($%g)", i);    ] with .c at R[3].c
+            [ exec sprintf("Catching($%g)", i);                ] with .c at R[4].c
+            [ exec sprintf("BoundaryNonInterrupting($%g)", i); ] with .c at R[5].c
+            [ exec sprintf("Throwing($%g)", i);                ] with .c at R[6].c
+            [ exec sprintf("End($%g)", i);                     ] with .c at R[7].c
+        ]
+    }
+    right
+}
+
+event_types(\
+none, message, timer, signal, multiple, conditional, link,\
+escalation, error, cancel, parallel, compensation, terminate\
+)
+.PE

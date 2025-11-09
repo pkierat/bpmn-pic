@@ -1,0 +1,15 @@
+.PS
+copy "bpmn.pic"
+
+G1: Gateway(none);                  { "none"                  with .c at G1.n + (0, 0.1) }; move right 1;
+G2: Gateway(exclusive);             { "exclusive"             with .c at G2.n + (0, 0.1) }; move right 1;
+G3: Gateway(parallel);              { "parallel"              with .c at G3.n + (0, 0.1) }; move right 1;
+G4: Gateway(inclusive);             { "inclusive"             with .c at G4.n + (0, 0.1) }; move right 0.5;
+
+move to G1.sw + (0, -0.6)
+
+G5: Gateway(complex);               { "complex"               with .c at G5.n + (0, 0.1) }; move right 1;
+G6: Gateway(event_based);           { "event_based"           with .c at G6.n + (0, 0.1) }; move right 1;
+G7: Gateway(event_based_exclusive); { "event_based_exclusive" with .c at G7.n + (0, 0.1) }; move right 1;
+G8: Gateway(event_based_parallel);  { "event_based_parallel"  with .c at G8.n + (0, 0.1) }; move right 0.5;
+.PE

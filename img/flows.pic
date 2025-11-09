@@ -1,0 +1,13 @@
+.PS
+copy "bpmn.pic"
+
+SequenceFlow(right 2); L1: last line; { "Sequence flow" at L1.c + (0, 0.1) }
+move
+DefaultFlow(right 2); L2: last line; { "Default flow" at L2.c + (0, 0.1) }
+
+move to L1.w + (0, -0.5)
+
+ConditionalFlow(right 2); L: last line; { "Conditional flow" at L.c + (0, 0.1) }
+move
+MessageFlow(right 2); L: last line; { "Message flow" at L.c + (0, 0.1) }
+.PE

@@ -4,6 +4,7 @@ ADOC_OPTS := -B $(PWD) --failure-level WARN -r asciidoctor-diagram
 
 sources  := $(wildcard *.adoc)
 targets  := $(patsubst %.adoc,%,$(sources))
+images   := $(patsubst %.pic,%.svg,$(shell find img -name '*.pic'))
 
 .PHONY: clean all pdf html md
 
@@ -13,10 +14,6 @@ pdf: $(targets:=.pdf)
 
 html: $(targets:=.html)
 
-md: $(targets:=.md)
-
-docbook: $(targets:=.xml)
-
 $(targets): %: %.html %.pdf
 
 bpmn.pic: src/bpmn.pic
@@ -25,13 +22,16 @@ bpmn.pic: src/bpmn.pic
 src/bpmn.pic:
 	$(MAKE) -C src
 
-%.pdf: %.adoc
+%.svg: %.pic
+	dpic -v $< > $@
+
+%.pdf: %.adoc $(images)
 	asciidoctor-pdf $(ADOC_OPTS) -o $@ $<
 
-%.html: %.adoc
+%.html: %.adoc $(images)
 	asciidoctor $(ADOC_OPTS) -o $@ $<
 
 clean:
-	rm -rf *.pdf *.xml *.html bpmn.pic
+	rm -rf *.pdf *.html bpmn.pic $(images)
 	make -C src clean
 
