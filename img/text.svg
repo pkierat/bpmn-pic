@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: dpic version 2025.08.01 option -v for SVG 1.1 -->
+<!-- width="340" height="100" -->
+<svg
+ xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+ xml:space="preserve"
+ style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision;
+ image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+ width="339.2px" height="99.2px"
+ viewBox="0 0 339.2 99.2"
+ font-size="11pt" text-anchor="middle"
+ stroke="black" stroke-miterlimit="10" stroke-width="1.066667" fill="none">
+<g>
+<g transform="rotate(0, 48, 48)">
+<text font-size="11pt"
+                           text-anchor="middle"
+                           stroke-width="0.266667"
+                           fill="black"
+                           x="48" y="48">
+Horizontal
+</text>
+</g>
+<g transform="rotate(-90, 144, 48)">
+<text font-size="11pt"
+                           text-anchor="middle"
+                           stroke-width="0.266667"
+                           fill="black"
+                           x="144" y="48">
+Vertical
+</text>
+</g>
+<g transform="rotate(-45, 228, 48)">
+<text font-size="11pt"
+                           text-anchor="middle"
+                           stroke-width="0.266667"
+                           fill="black"
+                           x="228" y="48">
+Slanted
+</text>
+</g>
+<g transform="rotate(45, 300, 48)">
+<text font-size="11pt"
+                           text-anchor="middle"
+                           stroke-width="0.266667"
+                           fill="black"
+                           x="300" y="48">
+Slanted
+</text>
+</g>
+</g></svg>

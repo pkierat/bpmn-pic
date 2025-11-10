@@ -1,22 +1,13 @@
-# vim: syntax=pic
+divert(-1)
+# Copyright (c) 2025 Pawel Kierat
+# Licensed under the MIT License. See LICENSE file in the project root for details.
 
-######################################################################
-#                             Shapes                                 #
-######################################################################
+# vim: syntax=pic
+divert
 
 pi = 3.1415926535
 
-define diamond { # radius, attr
-  [
-    line from Here + (0, $1) to Here + ($1,  0) \
-                        then to Here + (0, -$1) \
-                        then to Here + (-$1, 0) \
-                        then to Here + (0,  $1) \
-                        $2
-  ]
-}
-
-define poly { # center, sides, radius
+define _poly { # center, sides, radius
   cx = $1.x
   cy = $1.y
   n = $2
@@ -30,6 +21,16 @@ define poly { # center, sides, radius
   }
   x[n] = x[0]
   y[n] = y[0]
+}
+
+define diamond { # radius, attr
+  [
+    line from Here + (0, $1) to Here + ($1,  0) \
+                        then to Here + (0, -$1) \
+                        then to Here + (-$1, 0) \
+                        then to Here + (0,  $1) \
+                        $2
+  ]
 }
 
 define triangle { # radius, attributes
@@ -57,44 +58,48 @@ define pentagon { # radius, attributes
 }
 
 define plus { # attributes
-  t = 0.033
-  l = 3*t
-  h = l/2
+  [
+    t = 0.033
+    l = 3*t
+    h = l/2
 
-  line from (Here + (-t/2, -l)) to (Here + (t/2, -l)) \
-                         then to (Here + (t/2, -t/2)) \
-                         then to (Here + (l, -t/2)) \
-                         then to (Here + (l, t/2)) \
-                         then to (Here + (t/2, t/2)) \
-                         then to (Here + (t/2, l)) \
-                         then to (Here + (-t/2, l)) \
-                         then to (Here + (-t/2, t/2)) \
-                         then to (Here + (-l, t/2)) \
-                         then to (Here + (-l, -t/2)) \
-                         then to (Here + (-t/2, -t/2)) \
-                         then to (Here + (-t/2, -l)) \
-                         then to (Here + (-t/2, -l)) $1
+    line from (Here + (-t/2, -l)) to (Here + (t/2, -l)) \
+                             then to (Here + (t/2, -t/2)) \
+                             then to (Here + (l, -t/2)) \
+                             then to (Here + (l, t/2)) \
+                             then to (Here + (t/2, t/2)) \
+                             then to (Here + (t/2, l)) \
+                             then to (Here + (-t/2, l)) \
+                             then to (Here + (-t/2, t/2)) \
+                             then to (Here + (-l, t/2)) \
+                             then to (Here + (-l, -t/2)) \
+                             then to (Here + (-t/2, -t/2)) \
+                             then to (Here + (-t/2, -l)) \
+                             then to (Here + (-t/2, -l)) $1
+  ]
 }
 
 define cross { # center, thickness, attributes
-  t = $2
-  l = 3 * $2
-  h = l / 2
-  r = 0.707106 # sqrt(2) / 2
+  [
+    t = $2
+    l = 3 * $2
+    h = l / 2
+    r = 0.707106 # sqrt(2) / 2
 
-  line from    (r * (-t/2 + l  ), r * (-t/2 - l  )) + $1 \
-            to (r * ( t/2 + l  ), r * ( t/2 - l  )) + $1 \
-       then to (r * ( t/2 + t/2), r * ( t/2 - t/2)) + $1 \
-       then to (r * ( l   + t/2), r * ( l   - t/2)) + $1 \
-       then to (r * ( l   - t/2), r * ( l   + t/2)) + $1 \
-       then to (r * ( t/2 - t/2), r * ( t/2 + t/2)) + $1 \
-       then to (r * ( t/2 - l  ), r * ( t/2 + l  )) + $1 \
-       then to (r * (-t/2 - l  ), r * (-t/2 + l  )) + $1 \
-       then to (r * (-t/2 - t/2), r * (-t/2 + t/2)) + $1 \
-       then to (r * (-l   - t/2), r * (-l   + t/2)) + $1 \
-       then to (r * (-l   + t/2), r * (-l   - t/2)) + $1 \
-       then to (r * (-t/2 + t/2), r * (-t/2 - t/2)) + $1 \
-       then to (r * (-t/2 + l  ), r * (-t/2 - l  )) + $1 $3
+    line from    (r * (-t/2 + l  ), r * (-t/2 - l  )) + $1 \
+              to (r * ( t/2 + l  ), r * ( t/2 - l  )) + $1 \
+         then to (r * ( t/2 + t/2), r * ( t/2 - t/2)) + $1 \
+         then to (r * ( l   + t/2), r * ( l   - t/2)) + $1 \
+         then to (r * ( l   - t/2), r * ( l   + t/2)) + $1 \
+         then to (r * ( t/2 - t/2), r * ( t/2 + t/2)) + $1 \
+         then to (r * ( t/2 - l  ), r * ( t/2 + l  )) + $1 \
+         then to (r * (-t/2 - l  ), r * (-t/2 + l  )) + $1 \
+         then to (r * (-t/2 - t/2), r * (-t/2 + t/2)) + $1 \
+         then to (r * (-l   - t/2), r * (-l   + t/2)) + $1 \
+         then to (r * (-l   + t/2), r * (-l   - t/2)) + $1 \
+         then to (r * (-t/2 + t/2), r * (-t/2 - t/2)) + $1 \
+         then to (r * (-t/2 + l  ), r * (-t/2 - l  )) + $1 $3
+  ]
 }
 
 define rarrow { # thickness, attr
@@ -144,7 +149,7 @@ define gear { # radius
   [
     r = $1/1.5
     C: circle rad r/2 with .c at Here
-    poly(C.c, 16, r)
+    _poly(C.c, 16, r)
     line from x[0], y[0] to x[0], y[0]
     for i = 0 to n - 1 by 2 do {
       dx = x[i+1] - x[i] ; dy = y[i+1] - y[i]
@@ -210,5 +215,17 @@ define tilde { # width
     B: box wid $1 ht $1  with .c at Here invisible
     arc cw at ((B.sw.x + B.s.x)/2, B.s.y + 0.05) from B.w to B.c thick 2
     arc ccw at ((B.s.x + B.se.x)/2, B.n.y - 0.05) from B.c to B.e thick 2
+  ]
+}
+
+define clock {
+  [
+    C: circle with .c at Here rad 0.125 $2
+    line from C.c to (C.c + (0.07,0)) $1
+    line from C.c to (C.c + (0,0.10)) $1
+    _poly(C.c, 12, 0.125)
+    for i = 0 to n - 1 do {
+      line from (x[i], y[i]) to ( (4*x[i]+cx)/5,(4*y[i]+cy)/5) $1
+    }
   ]
 }

@@ -1,0 +1,14 @@
+.PS
+copy "bpmn.pic"
+
+B1: box width 1 height 1 invisible with .nw at (0,0);
+B2: box width 1 height 1 invisible;
+B3: box invisible
+B4: box invisible
+
+Text("Horizontal", B1.c); 
+Text("Vertical", B2.c, -90); 
+Text("Slanted", B3.c, -45)
+Text("Slanted", B4.c, 45)
+
+.PE

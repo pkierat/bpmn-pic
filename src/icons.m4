@@ -1,6 +1,9 @@
-# vim: syntax=pic
+divert(-1)
+# Copyright (c) 2025 Pawel Kierat
+# Licensed under the MIT License. See LICENSE file in the project root for details.
 
-# Events
+# vim: syntax=pic
+divert
 
 define icon_event_none {
 }
@@ -10,15 +13,7 @@ define icon_event_message { # fg, bg, attr
 }
 
 define icon_event_timer { # fg, bg, attr
-  [
-    C: circle with .c at Here rad 0.125 $2
-    line from C.c to (C.c + (0.07,0)) $1
-    line from C.c to (C.c + (0,0.10)) $1
-    poly(C.c, 12, 0.125)
-    for i = 0 to n - 1 do {
-      line from (x[i], y[i]) to ( (4*x[i]+cx)/5,(4*y[i]+cy)/5) $1
-    }
-  ] with .c at Here $3
+  [ clock($1, $2) ] with .c at Here $3
 }
 
 define icon_event_signal { # fg, bg, attr
@@ -84,8 +79,6 @@ define icon_event_terminate { # fg, bg, attr
   ] with .c at Here $3
 }
 
-# Gateways
-
 define icon_gateway_none {
 }
 
@@ -105,7 +98,9 @@ define icon_gateway_exclusive { # fg, bg, attr
 }
 
 define icon_gateway_parallel {
-  plus(shaded "black")
+  [
+    plus(shaded "black")
+  ] with .c at Here $3
 }
 
 define icon_gateway_inclusive {
@@ -135,8 +130,6 @@ define icon_gateway_event_based_exclusive {
 define icon_gateway_event_based_parallel {
   bpmn_event_start(parallel, , with .c at Here scaled 0.5)
 }
-
-# Tasks
 
 define icon_task_none {
 }

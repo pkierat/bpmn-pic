@@ -1,4 +1,9 @@
+divert(-1)
+# Copyright (c) 2025 Pawel Kierat
+# Licensed under the MIT License. See LICENSE file in the project root for details.
+
 # vim: syntax=pic
+divert
 
 define bpmn_sequence_flow { # $1, $2, ... - line segments
     _bpmn_flow([], solid, shaded "black", $1, $2, $3, $4, $5, $6, $7, $8, $9)

@@ -3,9 +3,13 @@ copy "bpmn.pic"
 
 down
 
+Diagram(10, "On-line Purchase Process" ht 0.2)
+
+move 0.25
+
 DSP: [
-    HorizontalBlackBoxPool(10, 0.5, "Delivery Service Provider")
-] with .nw at (0, 0)
+    BlackBoxPool(10, 0.5, "Delivery Service Provider")
+]
 
 move
 
@@ -59,7 +63,7 @@ Payments: [
 ] with .w at  (Orders.OrderCreated.w.x, PaymentsPool.Content.w.y)
 
 PSP: [
-    HorizontalBlackBoxPool(10, 0.5, "Payment Service Provider")
+    BlackBoxPool(10, 0.5, "Payment Service Provider")
 ] with .nw at PaymentsPool.sw - (0, 0.5)
 
 MessageFlow(from Orders.OrderCreated.n to Inventory.OrderCreated.s)

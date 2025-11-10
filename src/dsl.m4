@@ -1,4 +1,15 @@
+divert(-1)
+# Copyright (c) 2025 Pawel Kierat
+# Licensed under the MIT License. See LICENSE file in the project root for details.
+
 # vim: syntax=pic
+divert
+
+define Diagram { # width [, title ]
+    box width $1 height 0 with .nw at (0, 0) invisible 
+    move to last box.n
+    $2
+}
 
 define Start { # type [, attributes ]
     bpmn_event_start($1, solid, $2)
@@ -61,24 +72,20 @@ define MessageFlow {
     bpmn_message_flow($1, $2, $3, $4, $5, $6, $7, $8, $9)
 }
 
-define HorizontalPool {
-    bpmn_horizontal_pool($1, $2, $3, $4) 
-}
-
-define HorizontalBlackBoxPool {
-    bpmn_horizontal_pool_black_box($1, $2, $3, $4)
-}
-
-define HorizontalLane {
-   bpmn_horizontal_lane($1, $2)
-}
-
 define Pool {
-    HorizontalPool($1, $2, $3)
+    bpmn_pool($1, $2, $3, $4)
+}
+
+define VerticalPool {
+    bpmn_vertical_pool($1, $2, $3, $4)
+}
+
+define BlackBoxPool {
+    bpmn_black_box_pool($1, $2, $3)
 }
 
 define Lane {
-    HorizontalLane($1, $2)
+    bpmn_lane($1, $2, $3)
 }
 
 define Text { # text, position, rotation

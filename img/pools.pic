@@ -3,20 +3,38 @@ copy "bpmn.pic"
 
 down
 
-box width 10 height 0 with .nw at (0, 0) invisible 
+Diagram(10)
 
-Pool1: Pool(10, 2, []) ; Text("Pool", Pool1.Label.c, -90)
+Pool1: Pool(10, 1, []) ; { Text("Pool", Pool1.Label.c, -90) }
+
+move to Pool1.sw + (2, -2)
+
+right
+
+Pool2: Pool(3, 2, [
+    down
+    Lane1: Lane(1, [])
+    Lane2: Lane(1, [])
+])
+
+{ Text("Horizontal pool with lanes", Pool2.Label.c, -90) }
+{ Text("Lane 1", Pool2.Lanes.Lane1.Label.c, -90) }
+{ Text("Lane 2", Pool2.Lanes.Lane2.Label.c, -90) }
 
 move
 
-Pool2: Pool(10, 3, [
+Pool3: Pool(2, 3, [
+    right
     Lane1: Lane(1, [])
     Lane2: Lane(1, [])
-    Lane3: Lane(1, [])
 ])
 
-Text("Pool with lanes", Pool2.Label.c, -90)
-Text("Lane 1", Pool2.Lanes.Lane1.Label.c, -90)
-Text("Lane 2", Pool2.Lanes.Lane2.Label.c, -90)
-Text("Lane 3", Pool2.Lanes.Lane3.Label.c, -90)
+{ Text("Vertical pool with lanes", Pool3.Label.c) }
+{ Text("Lane 1", Pool3.Lanes.Lane1.Label.c) }
+{ Text("Lane 2", Pool3.Lanes.Lane2.Label.c) }
+
+move to Pool1.sw + (0, -4.5)
+
+Pool4: BlackBoxPool(10, 0.5, "Black box pool")
+
 .PE

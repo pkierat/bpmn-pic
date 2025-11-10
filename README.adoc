@@ -10,7 +10,7 @@
 
 `bpmn.pic` is a collection of https://gitlab.com/aplevich/dpic[DPIC] macros for generating BPMN 2.0 diagram images for use in various kinds of documents and presentations.
 
-Although the library focuses on supporting SVG as the primary output format, most of the elements (except pools and lanes) should also work with other DPIC formats.
+Although the library focuses on supporting SVG as the primary output format, most of the elements (except pools and lanes) should also work with other formats produced by DPIC.
 
 Currently supported BPMN element types include:
 
@@ -37,6 +37,8 @@ $ wget https://gitlab.com/pkierat/bpmn-pic/-/raw/master/bpmn.pic
 
 The file is self-contained, and has no external run-time dependencies apart from DPIC itself.
 
+<<<
+
 == Building from source
 
 Buiding `bpmn.pic` requires the following tools to be available on the `PATH`:
@@ -45,15 +47,9 @@ Buiding `bpmn.pic` requires the following tools to be available on the `PATH`:
 * https://www.gnu.org/software/make/[Make]
 * https://www.gnu.org/software/make/[M4 Macro Processor]
 
-Building `README.pdf` requires in addition:
-
-* DPIC
-* Asciidoctor PDF
-* Asciidoctor Diagram
-
 **Procedure**:
 
-. Clone the repository:
+. Clone the repository from https://gitlab.com/pkierat/bpmn-dpic[GitLab] or https://gitlab.com/pkierat/bpmn-dpic[GitHub]:
 +
 ----
 $ git clone git@gitlab.com:pkierat/bpmn-pic.git ./bpmn-pic
@@ -63,7 +59,7 @@ $ cd bpmn-pic
 . Build `bpmn.pic`:
 +
 ----
-$ make -C src bpmn.pic
+$ make -C src clean all
 ----
 +
 . (Optional) Build `README.pdf`:
@@ -93,11 +89,13 @@ $ dpic -v diagram.pic > diagram.svg
 
 The output SVG should look like below:
 
-image::diagram.svg[align="center"]
+image::diagram.svg[pdfwidth="20%", align="center"]
+
+For more usage samples, please consult the `*.pic` files in the `img` directory.
 
 <<<
 
-== Macros
+== Elements
 
 === Events
 
@@ -109,14 +107,29 @@ image::diagram.svg[align="center"]
 `Throwing(type [, attributes])`
 `End(type [, attributes])`
 
+image::events.svg[pdfwidth="90%",align="center"]
+
+<<<
+
 === Gateways
 
 `Gateway(type [, attributes ])`
 
+image::gateways.svg[pdfwidth="90%",align="center"]
+
 === Activities
 
+==== Tasks
+
 `Task(text [, type [, attributes ] ])`
+
+image::tasks.svg[pdfwidth="90%",align="center"]
+
+==== Sub-processes
+
 `SubProcess(text [, type [, attributes ] ])`
+
+image::sub-processes.svg[pdfwidth="90%",align="center"]
 
 === Flows
 
@@ -125,51 +138,46 @@ image::diagram.svg[align="center"]
 `ConditionalFlow([ linespec_1 [, linespec_2 [, ... ] ] ])`
 `MessageFlow([ linespec_1 [, linespec_2 [, ... ] ] ])`
 
-=== Pools and lanes
-
-`HorizontalPool(width, height, lanes [, attributes ])`
-`HorizontalBlackBoxPool(width, height [, text [, attributes ] ])`
-`HorizontalLane(height, process [, attributes ])`
-`Pool(width, height, lanes [, attributes ])`
-`Lane(height, process [, attributes ])`
-
-=== Other
-
-`Text(text, position [, rotation ])`
-
-<<<
-
-== Elements
-
-=== Events
-
-image::events.svg[pdfwidth="90%",align="center"]
-
-<<<
-
-=== Gateways
-
-image::gateways.svg[pdfwidth="90%",align="center"]
-
-=== Activities
-
-==== Tasks
-
-image::tasks.svg[pdfwidth="90%",align="center"]
-
-==== Sub-processes
-
-image::sub-processes.svg[pdfwidth="90%",align="center"]
-
-==== Flows
-
 image::flows.svg[pdfwidth="90%",align="center"]
 
 === Pools and Lanes
 
+`Pool(width, height, lanes [, attributes ])`
+`BlackBoxPool(width, height [, attributes ])`
+`Lane(height, process [, attributes ])`
+
 image::pools.svg[pdfwidth="90%",align="center"]
 
-== Example
+=== Text
 
-image::example.svg[pdfwidth="90%",align="center"]
+`Text(text, position [, rotation ])`
 
+image::text.svg[pdfwidth="50%",align="center"]
+
+<<<
+
+== Demo
+
+image::demo.svg[pdfwidth="90%",align="center"]
+
+== Notes
+
+. `bpmn.pic` doesn't perform any kind of syntactic or semantic validation against the BPMN 2.0 spec. In particular, there's no check if a given combination of event type (start, end etc.) and trigger type (message, timer etc.) is valid according to the specification.
+. DPIC does not support text rotation, it needs to be implemented in SVG directly instead. For the rotated text to render properly, it must be created after its target location is determined, e.g.:
++
+[source, pic]
+----
+.PS
+B: box width 0.25 height 1 ; { Text("Rotated text", B.c, "-90") }
+.PE
+----
++
+Also, for the same reason, the north-west corner of the entire diagram needs to be positioned at (0, 0). This can be achieved by positioning the first element with .nw at (0, 0) or by using the dedicated `Diagram(width [, title ])` macro:
++
+[source, pic]
+----
+.PS
+Diagram(10, "Diagram")
+P: Pool(10, 1, []) ; { Text("Pool", P.Label.c, -90) }
+.PE
+----

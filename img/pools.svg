@@ -2,67 +2,90 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
 "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Creator: dpic version 2025.08.01 option -v for SVG 1.1 -->
-<!-- width="964" height="532" -->
+<!-- width="964" height="556" -->
 <svg
  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
  xml:space="preserve"
  style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision;
  image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
- width="963.2px" height="531.2px"
- viewBox="0 0 963.2 531.2"
+ width="963.2px" height="555.2px"
+ viewBox="0 0 963.2 555.2"
  font-size="11pt" text-anchor="middle"
  stroke="black" stroke-miterlimit="10" stroke-width="1.066667" fill="none">
 <g>
-<rect x="1.066667" y="0.533333" width="960" height="192" />
-<rect x="1.066667" y="0.533333" width="24" height="192" />
-<g transform="rotate(-90, 12, 96)">
+<rect x="1.066667" y="0.533333" width="960" height="96" />
+<rect x="1.066667" y="0.533333" width="24" height="96" />
+<g transform="rotate(-90, 12, 48)">
 <text font-size="11pt"
                            text-anchor="middle"
                            stroke-width="0.266667"
                            fill="black"
-                           x="12" y="96">
+                           x="12" y="48">
 Pool
 </text>
 </g>
-<rect x="1.066667" y="240.533333" width="960" height="288" />
-<rect x="1.066667" y="240.533333" width="24" height="288" />
-<rect x="25.066667" y="240.533333" width="936" height="96" />
-<rect x="25.066667" y="336.533333" width="936" height="96" />
-<rect x="25.066667" y="432.533333" width="936" height="96" />
-<g transform="rotate(-90, 12, 384)">
+<rect x="193.066667" y="192.533333" width="288" height="192" />
+<rect x="193.066667" y="192.533333" width="24" height="192" />
+<rect x="217.066667" y="192.533333" width="264" height="96" />
+<rect x="217.066667" y="288.533333" width="264" height="96" />
+<g transform="rotate(-90, 204, 288)">
 <text font-size="11pt"
                            text-anchor="middle"
                            stroke-width="0.266667"
                            fill="black"
-                           x="12" y="384">
-Pool with lanes
+                           x="204" y="288">
+Horizontal pool with lanes
 </text>
 </g>
-<g transform="rotate(-90, 36, 288)">
+<g transform="rotate(-90, 228, 240)">
 <text font-size="11pt"
                            text-anchor="middle"
                            stroke-width="0.266667"
                            fill="black"
-                           x="36" y="288">
+                           x="228" y="240">
 Lane 1
 </text>
 </g>
-<g transform="rotate(-90, 36, 384)">
+<g transform="rotate(-90, 228, 336)">
 <text font-size="11pt"
                            text-anchor="middle"
                            stroke-width="0.266667"
                            fill="black"
-                           x="36" y="384">
+                           x="228" y="336">
 Lane 2
 </text>
 </g>
-<g transform="rotate(-90, 36, 480)">
+<rect x="529.066667" y="144.533333" width="192" height="288" />
+<rect x="529.066667" y="144.533333" width="192" height="24" />
+<rect x="529.066667" y="168.533333" width="96" height="264" />
+<rect x="625.066667" y="168.533333" width="96" height="264" />
+<g transform="rotate(0, 624, 156)">
 <text font-size="11pt"
                            text-anchor="middle"
                            stroke-width="0.266667"
                            fill="black"
-                           x="36" y="480">
-Lane 3
+                           x="624" y="156">
+Vertical pool with lanes
 </text>
 </g>
+<g transform="rotate(0, 576, 180)">
+<text font-size="11pt"
+                           text-anchor="middle"
+                           stroke-width="0.266667"
+                           fill="black"
+                           x="576" y="180">
+Lane 1
+</text>
+</g>
+<g transform="rotate(0, 672, 180)">
+<text font-size="11pt"
+                           text-anchor="middle"
+                           stroke-width="0.266667"
+                           fill="black"
+                           x="672" y="180">
+Lane 2
+</text>
+</g>
+<rect x="1.066667" y="504.533333" width="960" height="48" />
+<text font-size="11pt" stroke-width="0.2pt" fill="black" x="481.066667" y="533.373333">Black box pool</text>
 </g></svg>

@@ -1,29 +1,25 @@
+divert(-1)
+# Copyright (c) 2025 Pawel Kierat
+# Licensed under the MIT License. See LICENSE file in the project root for details.
+
 # vim: syntax=pic
+divert
 
-level = 0
-abs_x[level] = Here.x
-abs_y[level] = Here.y
+define bpmn_pool { # width, height, lanes, attributes
+    [
+        _width  = $1
+        _height = $2
 
-define push_abs_xy {
-    level += 1
-    abs_x[level] = Here.x + abs_x[level-1]
-    abs_y[level] = Here.y + abs_y[level-1]
-}
-
-define pop_abs_xy {
-    abs_x[level] = 0
-    abs_y[level] = 0
-    level -= 1
-}
-
-define with_abs_xy {
-    push_abs_xy
-    $1
-    pop_abs_xy
-}
-
-define abs_xy {
-    $1 + (abs_x[level], abs_y[level])
+        box width _width height _height
+        if (_width > _height) then {
+            Label: box width 0.25 height _height with .w at last box.w
+            Content: box width _width - Label.width height _height invisible with .w at Label.e
+        } else {
+            Label: box width _width height 0.25 with .n at last box.n
+            Content: box width _width height _height - 0.25 invisible with .n at Label.s
+        }
+        Lanes: $3 with .nw at Content.nw
+    ] $4
 }
 
 define bpmn_horizontal_pool { # width, height, lanes, attributes
@@ -38,16 +34,53 @@ define bpmn_horizontal_pool { # width, height, lanes, attributes
     ] $4
 }
 
-define bpmn_horizontal_pool_black_box { # width, height, text, attributes
-    box width $1 height $2 $3 $4
+define bpmn_vertical_pool { # width, height, lanes, attributes
+    [
+        _width  = $1
+        _height = $2
+
+        box width _width height _height
+        Label: box width _width height 0.25 with .n at last box.n
+        Content: box width _width height _height - 0.25 invisible with .n at Label.s
+        Lanes: $3 with .nw at Content.nw
+    ] $4
 }
 
-define bpmn_horizontal_lane { # height, content, attributes
+define bpmn_black_box_pool { # width, height, attributes
+    box width $1 height $2 $3
+}
+
+define bpmn_lane { # thickness, content, attributes
     [
-        _height = $1
-        
-        Label: box width 0.25 height _height invisible
-        Content: box width Content.width height _height with .w at Label.w
+        _thickness = $1
+
+        if (Content.width > Content.height) then {
+            Label: box width 0.25 height _thickness invisible
+            Content: box width Content.width height _thickness with .w at Label.w
+        } else {
+            Label: box width _thickness height 0.25 invisible
+            Content: box width _thickness height Content.height with .n at Label.n
+        }
+        Process: $2
+    ] $3
+}
+
+define bpmn_horizontal_lane { # thickness, content, attributes
+    [
+        _thickness = $1
+
+        Label: box width 0.25 height _thickness invisible
+        Content: box width Content.width height _thickness with .w at Label.w
+        Process: $2
+    ] $3
+}
+
+define bpmn_vertical_lane { # thickness, content, attributes
+    [
+        _thickness = $1
+
+        Label: box width _thickness height 0.25 invisible
+        Content: box width _thickness height Content.height with .n at Label.n
         Process: $2
     ] $3
 }

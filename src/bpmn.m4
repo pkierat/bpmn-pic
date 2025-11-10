@@ -1,3 +1,6 @@
+# Copyright (c) 2025 Pawel Kierat
+# Licensed under the MIT License. See LICENSE file in the project root for details.
+
 # vim: syntax=pic
 
 maxpswid = 100
