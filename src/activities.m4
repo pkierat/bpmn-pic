@@ -1,4 +1,9 @@
+divert(-1)
+# Copyright (c) 2025 Pawel Kierat
+# Licensed under the MIT License. See LICENSE file in the project root for details.
+
 # vim: syntax=pic
+divert
 
 define bpmn_activity {
   box wid 1 ht 0.75 rad 0.02 $1

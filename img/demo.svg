@@ -51,6 +51,8 @@ Orders
 Payments
 </text>
 </g>
+<rect x="1.066667" y="667.733333" width="960" height="48" />
+<text font-size="11pt" stroke-width="0.2pt" fill="black" x="481.066667" y="696.573333">Payment Service Provider</text>
 <circle cx="92.266667" cy="355.733333" r="19.2" />
 <line x1="111.466667" y1="355.733333" x2="159.466667" y2="355.733333" />
 <polyline stroke-width="0" fill="black"
@@ -343,8 +345,6 @@ Payments
 <polyline stroke="white"
  points="857.386667,552.133333 866.986667,558.533333
 876.586667,552.133333" />
-<rect x="1.066667" y="667.733333" width="960" height="48" />
-<text font-size="11pt" stroke-width="0.2pt" fill="black" x="481.066667" y="696.573333">Payment Service Provider</text>
 <line stroke-dasharray="5.6,4"
  x1="322.666667" y1="336.533333" x2="322.666667" y2="230.933333" />
 <circle fill="white" cx="322.666667" cy="336.533333" r="2.4" />

@@ -172,7 +172,7 @@ B: box width 0.25 height 1 ; { Text("Rotated text", B.c, "-90") }
 .PE
 ----
 +
-Also, for the same reason, the north-west corner of the entire diagram needs to be positioned at (0, 0). This can be achieved by positioning the first element with .nw at (0, 0) or by using the dedicated `Diagram(width [, title ])` macro:
+. For the same reason as above, the north-west corner of the entire diagram needs to be positioned at (0, 0). This can be achieved by positioning the first element with `.nw at (0, 0)` or by using the dedicated `Diagram(width [, title ])` macro:
 +
 [source, pic]
 ----
